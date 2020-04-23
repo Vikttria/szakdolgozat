@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="hu" layout:decorator="fragments/main" xmlns:layout="http://www.w3.org/1999/xhtml">
+<html lang="hu" layout:decorator="fragments/main"
+      xmlns:layout="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <title>Zálog-program</title>
 </head>
@@ -7,7 +9,18 @@
 
 <div layout:fragment="content">
 
-        <!--űrlap-->
+        <div class="form-row mt-5">
+            <div class="col-md-5 offset-md-7">
+                <select id="inputState" class="form-control">
+                    <option selected>Ügyfél...</option>
+                    <option th:each="type : ${allTypes}"
+                            th:value="${type}"
+                            th:text="#{${'seedstarter.type.' + type}}">Wireframe</option>
+                </select>
+            </div>
+
+        </div>
+
         <div class="form-row mt-5">
             <div class="input-group mb-4 col-md-6">
                 <div class="input-group">
@@ -82,8 +95,8 @@
             </div>
         </div>
 
-        <div class="form-row mt-5">
-            <button type="button" class="btn btn-secondary btn-lg btn-block">Felvétel</button>
+        <div class="form-row mt-5 mb-5">
+            <button type="submit" class="btn btn-secondary btn-lg btn-block">Felvétel</button>
         </div>
 
     </div>
