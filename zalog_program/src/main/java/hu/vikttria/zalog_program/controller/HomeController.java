@@ -36,4 +36,8 @@ public class HomeController {
         return "bejelentkezes";
     }
 
+    @RequestMapping("/ugyfelFelvet")
+    public String ugyfelFelvet(){
+        return "ugyfelFelvet";
+    }
 }
