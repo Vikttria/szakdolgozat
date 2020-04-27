@@ -8,7 +8,7 @@ public class Ugyfel {
 
     @GeneratedValue
     @Id
-    private int id;
+    private long id;
     private String szig;
     private String nev;
     private String anyjaNeve;
@@ -19,7 +19,7 @@ public class Ugyfel {
 
     public Ugyfel(){}
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 

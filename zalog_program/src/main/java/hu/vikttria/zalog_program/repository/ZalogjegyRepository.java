@@ -6,7 +6,7 @@ import hu.vikttria.zalog_program.zaloghaz.Zalogjegy;
 
 import java.util.List;
 
-public interface ZalogjegyRepository extends CrudRepository<Zalogjegy, Integer> {
+public interface ZalogjegyRepository extends CrudRepository<Zalogjegy, Long> {
 
     List<Zalogjegy> findAll();
 

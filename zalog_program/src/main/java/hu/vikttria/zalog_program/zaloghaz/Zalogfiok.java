@@ -9,7 +9,7 @@ public class Zalogfiok {
 
     @GeneratedValue
     @Id
-    private int id;
+    private long id;
     private String cim;
     private String telefon;
     @OneToMany(mappedBy = "zalogfiok")
@@ -19,7 +19,7 @@ public class Zalogfiok {
 
     public Zalogfiok(){}
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 

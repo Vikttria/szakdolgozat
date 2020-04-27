@@ -8,8 +8,8 @@ public class Zalogjegy {
 
     @GeneratedValue
     @Id
-    private int id;
-    private String megnevezes;
+    private long id;
+    private String leiras;
     private int karat;
     private double suly;
     private int dbSzam;
@@ -26,7 +26,7 @@ public class Zalogjegy {
     public Zalogjegy() {
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -34,12 +34,12 @@ public class Zalogjegy {
         this.id = id;
     }
 
-    public String getMegnevezes() {
-        return megnevezes;
+    public String getLeiras() {
+        return leiras;
     }
 
-    public void setMegnevezes(String megnevezes) {
-        this.megnevezes = megnevezes;
+    public void setLeiras(String leiras) {
+        this.leiras = leiras;
     }
 
     public int getKarat() {

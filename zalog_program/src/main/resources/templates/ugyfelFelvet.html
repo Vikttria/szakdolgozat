@@ -1,24 +1,26 @@
 <!DOCTYPE html>
-<html lang="hu" layout:decorator="fragments/main" xmlns:layout="http://www.w3.org/1999/xhtml">
+<html lang="hu" layout:decorator="fragments/main" xmlns:layout="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <title>Zálog-program</title>
 </head>
 <body>
 <div layout:fragment="content">
 
+    <form name="ugyfelFelvet" th:action="@{/ugyfelUj}" th:object="${ugyfel}" method="post">
     <div class="form-row mt-5">
         <div class="input-group mb-4 col-md-5 offset-md-1">
             <div class="input-group">
                 <span class="input-group-text">Név</span>
             </div>
-            <input type="text" class="form-control">
+            <input th:field="*{nev}" type="text" class="form-control">
         </div>
 
         <div class="input-group mb-4 col-md-5 offset-md-1">
             <div class="input-group">
                 <span class="input-group-text">Személyigazolvány szám</span>
             </div>
-            <input type="text" class="form-control">
+            <input th:field="*{szig}" type="text" class="form-control">
         </div>
     </div>
 
@@ -27,7 +29,7 @@
             <div class="input-group">
                 <span class="input-group-text">Anyja neve</span>
             </div>
-            <input type="text" class="form-control">
+            <input th:field="*{anyjaNeve}" type="text" class="form-control">
         </div>
     </div>
 
@@ -36,7 +38,7 @@
             <div class="input-group">
                 <span class="input-group-text">Cím</span>
             </div>
-            <input type="text" class="form-control">
+            <input th:field="*{cim}" type="text" class="form-control">
         </div>
     </div>
 
@@ -45,7 +47,7 @@
             <div class="input-group">
                 <span class="input-group-text">E-mail</span>
             </div>
-            <input type="text" class="form-control">
+            <input th:field="*{email}" type="text" class="form-control">
         </div>
     </div>
 
@@ -55,7 +57,7 @@
         </div>
     </div>
 
-
+    </form>
 </div>
 </body>
 </html>

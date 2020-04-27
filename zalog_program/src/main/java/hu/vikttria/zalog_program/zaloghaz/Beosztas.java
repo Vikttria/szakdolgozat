@@ -8,14 +8,14 @@ public class Beosztas {
 
     @GeneratedValue
     @Id
-    private int id;
+    private long id;
     private String munkakor;
     @OneToMany(mappedBy = "beosztas")
     private List<Dolgozo> dolgozok;
 
     public Beosztas(){}
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 

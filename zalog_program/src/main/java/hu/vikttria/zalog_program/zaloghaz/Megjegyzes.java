@@ -7,14 +7,14 @@ public class Megjegyzes {
 
     @GeneratedValue
     @Id
-    private int id;
+    private long id;
     private String megjegyzes;
     @OneToOne
     private Zalogjegy zalogjegy;
 
     public Megjegyzes(){}
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 

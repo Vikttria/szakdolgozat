@@ -7,7 +7,7 @@ public class Dolgozo {
 
     @GeneratedValue
     @Id
-    private int id;
+    private long id;
     private String nev;
     @ManyToOne
     private Beosztas beosztas;
@@ -16,7 +16,7 @@ public class Dolgozo {
 
     public Dolgozo(){}
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
