@@ -9,15 +9,28 @@ public class Ugyfel {
     @GeneratedValue
     @Id
     private long id;
+    @Column(unique = true, nullable = false)
     private String szig;
+    @Column(nullable = false)
     private String nev;
+    @Column(nullable = false)
     private String anyjaNeve;
+    @Column(nullable = false)
     private String cim;
+    @Column(unique = true)
     private String email;
     @OneToMany(mappedBy = "ugyfel")
     private List<Zalogjegy> zalogtargyak;
 
     public Ugyfel(){}
+
+    public Ugyfel(String nev, String anyjaNeve, String szig, String cim, String email){
+        this.nev = nev;
+        this.anyjaNeve = anyjaNeve;
+        this.szig = szig;
+        this.cim = cim;
+        this.email = email;
+    }
 
     public long getId() {
         return id;

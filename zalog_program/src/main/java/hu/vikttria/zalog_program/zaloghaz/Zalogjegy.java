@@ -9,12 +9,18 @@ public class Zalogjegy {
     @GeneratedValue
     @Id
     private long id;
+    @Column(nullable = false)
     private String leiras;
+    @Column(nullable = false)
     private int karat;
+    @Column(nullable = false)
     private double suly;
+    @Column(nullable = false)
     private int dbSzam;
+    @Column(nullable = false)
     private Date beadas;
-    private Date lejarat;
+//    private Date lejarat;
+    @Column(nullable = false)
     private int osszeg;
     @ManyToOne
     private Zalogfiok zalogfiok;
@@ -24,6 +30,16 @@ public class Zalogjegy {
     private Megjegyzes megjegyzes;
 
     public Zalogjegy() {
+    }
+
+    public Zalogjegy(String leiras, int karat, double suly, int dbSzam, int osszeg, Date beadas, Ugyfel ugyfel){
+        this.leiras = leiras;
+        this.karat = karat;
+        this.suly = suly;
+        this. dbSzam = dbSzam;
+        this.osszeg = osszeg;
+        this.beadas = beadas;
+        this.ugyfel = ugyfel;
     }
 
     public long getId() {
@@ -74,13 +90,13 @@ public class Zalogjegy {
         this.beadas = beadas;
     }
 
-    public Date getLejarat() {
+/*    public Date getLejarat() {
         return lejarat;
     }
 
     public void setLejarat(Date lejarat) {
         this.lejarat = lejarat;
-    }
+    }*/
 
     public int getOsszeg() {
         return osszeg;
