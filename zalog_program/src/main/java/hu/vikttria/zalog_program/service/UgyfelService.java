@@ -5,6 +5,7 @@ import hu.vikttria.zalog_program.zaloghaz.Ugyfel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -22,6 +23,6 @@ public class UgyfelService {
     }
 
     public List<Ugyfel> allUgyfel() {
-        return ugyfelRepo.findAll();
+        return new ArrayList<>(ugyfelRepo.findAll());
     }
 }

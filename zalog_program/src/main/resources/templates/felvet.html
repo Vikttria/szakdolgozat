@@ -11,17 +11,17 @@
 
     <form name="felvet" th:action="@{/zalogUj}" th:object="${zalogjegy}" method="post">
 
-       <!-- <div class="form-row mt-5">
+        <div class="form-row mt-5">
                 <div class="col-md-5 offset-md-7">
                     <select th:field="*{ugyfel}" id="inputState" class="form-control">
-                        <option selected>Ügyfél...</option>
+
                         <option th:each="ugyfel : ${ugyfelek}"
                                 th:value="${ugyfel.nev}"
                                 th:text="${ugyfel.nev}"></option>
                     </select>
                 </div>
 
-        </div>-->
+        </div>
 
         <div class="form-row mt-5">
             <div class="input-group mb-4 col-md-6">

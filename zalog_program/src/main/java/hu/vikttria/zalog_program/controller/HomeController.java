@@ -85,7 +85,7 @@ public class HomeController {
     }
 
     @RequestMapping(value = "/ugyfelUj", method = RequestMethod.POST)
-    public String ugyfelFelvetSubmit(@ModelAttribute Ugyfel ugyfel){
+    public String ugyfelFelvetSubmit(@ModelAttribute Ugyfel ugyfel, Model model){
         log.info(ugyfel.getNev());
         log.info(ugyfel.getAnyjaNeve());
         log.info(ugyfel.getCim());
@@ -93,7 +93,9 @@ public class HomeController {
         log.info(ugyfel.getSzig());
 
         ugyfelService.ujUgyfel(ugyfel.getNev(), ugyfel.getAnyjaNeve(), ugyfel.getSzig(), ugyfel.getCim(), ugyfel.getEmail());
-        return "ugyfelFelvet";
+
+        model.addAttribute("zalogjegy", new Zalogjegy());
+        return "felvet";
     }
 
 
