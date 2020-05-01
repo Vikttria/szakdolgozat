@@ -47,12 +47,7 @@ public class HomeController {
 
     @RequestMapping(value = "/zalogUj", method = RequestMethod.POST)
     public String felvetSubmit(@ModelAttribute Zalogjegy zalogjegy){
-        log.info(zalogjegy.getLeiras());
-        log.info(String.valueOf(zalogjegy.getDbSzam()));
-        log.info(String.valueOf(zalogjegy.getKarat()));
-        log.info(String.valueOf(zalogjegy.getOsszeg()));
-        log.info(String.valueOf(zalogjegy.getSuly()));
-        log.info(String.valueOf(zalogjegy.getUgyfel()));
+        log.info("Új zálogjegy felvétele");
 
         zalogjegyService.ujZalog(zalogjegy.getLeiras(),zalogjegy.getKarat(), zalogjegy.getSuly(), zalogjegy.getDbSzam(), zalogjegy.getOsszeg(), new Date(), zalogjegy.getUgyfel());
         return "felvet";
@@ -86,15 +81,12 @@ public class HomeController {
 
     @RequestMapping(value = "/ugyfelUj", method = RequestMethod.POST)
     public String ugyfelFelvetSubmit(@ModelAttribute Ugyfel ugyfel, Model model){
-        log.info(ugyfel.getNev());
-        log.info(ugyfel.getAnyjaNeve());
-        log.info(ugyfel.getCim());
-        log.info(ugyfel.getEmail());
-        log.info(ugyfel.getSzig());
+        log.info("Új ügyfél felvétele");
 
         ugyfelService.ujUgyfel(ugyfel.getNev(), ugyfel.getAnyjaNeve(), ugyfel.getSzig(), ugyfel.getCim(), ugyfel.getEmail());
 
         model.addAttribute("zalogjegy", new Zalogjegy());
+        model.addAttribute("ugyfelek", ugyfelService.allUgyfel());
         return "felvet";
     }
 

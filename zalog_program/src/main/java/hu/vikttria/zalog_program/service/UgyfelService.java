@@ -5,6 +5,7 @@ import hu.vikttria.zalog_program.zaloghaz.Ugyfel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,5 +25,11 @@ public class UgyfelService {
 
     public List<Ugyfel> allUgyfel() {
         return new ArrayList<>(ugyfelRepo.findAll());
+    }
+
+    @PostConstruct
+    public void init(){
+        Ugyfel ugyfel = new Ugyfel("Anonymous", "", "", "", "");
+        ugyfelRepo.save(ugyfel);
     }
 }
