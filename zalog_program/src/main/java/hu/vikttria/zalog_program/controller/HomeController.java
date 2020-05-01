@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 
@@ -42,6 +43,8 @@ public class HomeController {
     public String felvet(Model model){
         model.addAttribute("zalogjegy", new Zalogjegy());
         model.addAttribute("ugyfelek", ugyfelService.allUgyfel());
+        model.addAttribute("maiNap", LocalDate.now());
+        model.addAttribute("lejarat", LocalDate.now().plusDays(90));
         return "felvet";
     }
 

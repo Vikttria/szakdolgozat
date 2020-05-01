@@ -12,30 +12,28 @@
     <form name="felvet" th:action="@{/zalogUj}" th:object="${zalogjegy}" method="post">
 
         <div class="form-row mt-5">
-                <div class="col-md-5 offset-md-7">
-                    <select th:field="*{ugyfel}" id="inputState" class="form-control">
-
-                        <option th:each="ugyfel : ${ugyfelek}"
-                                th:value="${ugyfel.nev}"
-                                th:text="${ugyfel.nev}"></option>
-                    </select>
-                </div>
-
-        </div>
-
-        <div class="form-row mt-5">
-            <div class="input-group mb-4 col-md-6">
+            <div class="input-group mb-4 col-md-3">
                 <div class="input-group">
                     <span class="input-group-text">Beadás dátuma</span>
+                    <p><b th:text="${maiNap}"></b></p>
                 </div>
-                <input class="form-control" type="date" placeholder="DÁTUM" readonly>
+
             </div>
 
-            <div class="input-group mb-4 col-md-6">
+            <div class="input-group mb-4 col-md-3">
                 <div class="input-group">
                     <span class="input-group-text">Lejárat dátuma</span>
+                    <p><b th:text="${lejarat}"></b></p>
                 </div>
-                <input class="form-control" type="date" placeholder="DÁTUM" readonly>
+            </div>
+
+            <div class="col-md-4 offset-md-2">
+                <select th:field="*{ugyfel}" id="inputState" class="form-control">
+
+                    <option th:each="ugyfel : ${ugyfelek}"
+                            th:value="${ugyfel.nev}"
+                            th:text="${ugyfel.nev}"></option>
+                </select>
             </div>
         </div>
 
