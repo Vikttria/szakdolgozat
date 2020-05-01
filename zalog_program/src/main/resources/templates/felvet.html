@@ -31,7 +31,7 @@
                 <select th:field="*{ugyfel}" id="inputState" class="form-control">
 
                     <option th:each="ugyfel : ${ugyfelek}"
-                            th:value="${ugyfel.nev}"
+                            th:value="${ugyfel.id}"
                             th:text="${ugyfel.nev}"></option>
                 </select>
             </div>

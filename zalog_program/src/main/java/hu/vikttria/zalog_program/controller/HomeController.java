@@ -49,10 +49,16 @@ public class HomeController {
     }
 
     @RequestMapping(value = "/zalogUj", method = RequestMethod.POST)
-    public String felvetSubmit(@ModelAttribute Zalogjegy zalogjegy){
+    public String felvetSubmit(@ModelAttribute Zalogjegy zalogjegy, Model model){
         log.info("Új zálogjegy felvétele");
 
         zalogjegyService.ujZalog(zalogjegy.getLeiras(),zalogjegy.getKarat(), zalogjegy.getSuly(), zalogjegy.getDbSzam(), zalogjegy.getOsszeg(), new Date(), zalogjegy.getUgyfel());
+
+        model.addAttribute("zalogjegy", new Zalogjegy());
+        model.addAttribute("ugyfelek", ugyfelService.allUgyfel());
+        model.addAttribute("maiNap", LocalDate.now());
+        model.addAttribute("lejarat", LocalDate.now().plusDays(90));
+
         return "felvet";
     }
 
@@ -61,13 +67,21 @@ public class HomeController {
         return "kivalt";
     }
 
+//    @RequestMapping(value = "/zalogUj", method = RequestMethod.POST)
+//    public String kivaltSubmit(@ModelAttribute Zalogjegy zalogjegy){
+//
+//        return
+//    }
+
     @RequestMapping("/hosszabbit")
     public String hosszabbit(){
         return "hosszabbit";
     }
 
     @RequestMapping("/kereses")
-    public String kereses(){
+    public String kereses(Model model)
+    {
+        model.addAttribute("ugyfelek", ugyfelService.allUgyfel());
         return "kereses";
     }
 
@@ -90,6 +104,8 @@ public class HomeController {
 
         model.addAttribute("zalogjegy", new Zalogjegy());
         model.addAttribute("ugyfelek", ugyfelService.allUgyfel());
+        model.addAttribute("maiNap", LocalDate.now());
+        model.addAttribute("lejarat", LocalDate.now().plusDays(90));
         return "felvet";
     }
 

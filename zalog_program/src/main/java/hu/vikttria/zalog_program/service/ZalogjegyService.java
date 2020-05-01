@@ -23,4 +23,8 @@ public class ZalogjegyService {
         zalogjegyRepo.save(zalogjegy);
     }
 
+    public Zalogjegy getZalogjegy(long id, int osszeg){
+        return zalogjegyRepo.findByIdAndOsszeg(id, osszeg);
+    }
+
 }

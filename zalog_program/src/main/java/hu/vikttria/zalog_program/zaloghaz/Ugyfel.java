@@ -9,10 +9,10 @@ public class Ugyfel {
     @GeneratedValue
     @Id
     private long id;
-    @Column(unique = true, nullable = false)
-    private String szig;
     @Column(nullable = false)
     private String nev;
+    @Column(unique = true, nullable = false)
+    private String szig;
     @Column(nullable = false)
     private String anyjaNeve;
     @Column(nullable = false)

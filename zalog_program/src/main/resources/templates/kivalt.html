@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="hu" layout:decorator="fragments/main" xmlns:layout="http://www.w3.org/1999/xhtml">
+<html lang="hu" layout:decorator="fragments/main" xmlns:layout="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <title>Zálog-program</title>
 </head>
@@ -7,6 +8,7 @@
 
 <div layout:fragment="content">
 
+    <form th:action="@{/kivaltas}">
     <div class="form-row mt-5">
         <div class="input-group col-md-4 mb-4 col-md-4">
             <div class="input-group">
@@ -20,6 +22,10 @@
                 <span class="input-group-text">Kölcsön összeg</span>
             </div>
             <input type="number" class="form-control" placeholder="Ft">
+        </div>
+
+        <div class="form-group col-md-2 offset-md-2 mb-4">
+            <button type="submit" class="btn btn-secondary btn-lg btn-block">OK</button>
         </div>
     </div>
 
@@ -81,6 +87,7 @@
     <div class="form-row mt-5 mb-5">
         <button type="submit" class="btn btn-secondary btn-lg btn-block">Kiváltás</button>
     </div>
+    </form>
 
 </div>
 

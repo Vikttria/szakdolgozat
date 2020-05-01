@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="hu" layout:decorator="fragments/main" xmlns:layout="http://www.w3.org/1999/xhtml">
+<html lang="hu" layout:decorator="fragments/main" xmlns:layout="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <title>Zálog-program</title>
 </head>
@@ -8,6 +9,16 @@
 <div layout:fragment="content">
 
     <!--űrlap-->
+    <div class="form-row mt-5">
+        <div class="col-md-4 offset-md-8">
+            <select id="inputState" class="form-control">
+                <option th:each="ugyfel : ${ugyfelek}"
+                        th:value="${ugyfel.nev}"
+                        th:text="${ugyfel.nev}"></option>
+            </select>
+        </div>
+    </div>
+
     <div class="form-row mt-5">
         <div class="input-group mb-4 col-md-6">
             <div class="input-group">
@@ -30,19 +41,6 @@
                 <span class="input-group-text">Zálogtárgy leírása</span>
             </div>
             <textarea class="form-control"></textarea>
-        </div>
-    </div>
-
-    <div class="form-row">
-        <div class="form-group col-md-3 mb-4">
-            <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input">
-                <label class="custom-control-label" for="customRadioInline1">Arany</label>
-            </div>
-            <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input">
-                <label class="custom-control-label" for="customRadioInline2">Ezüst</label>
-            </div>
         </div>
     </div>
 
@@ -88,6 +86,8 @@
 
 </div>
 
+
+<!-- keresés eredménye -->
 <div class="container">
     <table class="table table-hover">
         <thead class="thead-light">
