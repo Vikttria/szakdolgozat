@@ -39,6 +39,7 @@ public class HomeController {
         return "bejelentkezes";
     }
 
+
     @RequestMapping("/felvet")
     public String felvet(Model model){
         model.addAttribute("zalogjegy", new Zalogjegy());
@@ -52,26 +53,38 @@ public class HomeController {
     public String felvetSubmit(@ModelAttribute Zalogjegy zalogjegy, Model model){
         log.info("Új zálogjegy felvétele");
 
-        zalogjegyService.ujZalog(zalogjegy.getLeiras(),zalogjegy.getKarat(), zalogjegy.getSuly(), zalogjegy.getDbSzam(), zalogjegy.getOsszeg(), new Date(), zalogjegy.getUgyfel());
+        zalogjegyService.ujZalog(zalogjegy.getLeiras(), zalogjegy.getKarat(), zalogjegy.getSuly(), zalogjegy.getDbSzam(), zalogjegy.getOsszeg(), LocalDate.now(), zalogjegy.getUgyfel());
 
         model.addAttribute("zalogjegy", new Zalogjegy());
         model.addAttribute("ugyfelek", ugyfelService.allUgyfel());
         model.addAttribute("maiNap", LocalDate.now());
-        model.addAttribute("lejarat", LocalDate.now().plusDays(90));
+        model.addAttribute("lejarat", zalogjegyService.futamidoLejarta(LocalDate.now()));
 
         return "felvet";
     }
 
     @RequestMapping("/kivalt")
-    public String kivalt(){
+    public String kivalt(Model model){
+        model.addAttribute("zalogjegy", new Zalogjegy());
         return "kivalt";
     }
 
-//    @RequestMapping(value = "/zalogUj", method = RequestMethod.POST)
-//    public String kivaltSubmit(@ModelAttribute Zalogjegy zalogjegy){
-//
-//        return
-//    }
+    @RequestMapping(value = "/kivaltKeres", method = RequestMethod.POST)
+    public String kivaltOkSubmit(@ModelAttribute Zalogjegy zalogjegy, Model model){
+        log.info("kivált OK gomb");
+        zalogjegy = zalogjegyService.getZalogjegy(zalogjegy.getId(), zalogjegy.getOsszeg());
+
+        model.addAttribute("beadas", zalogjegy.getBeadas());
+        model.addAttribute("lejarat", zalogjegyService.futamidoLejarta(zalogjegy.getBeadas()));
+        model.addAttribute("leiras", zalogjegy.getLeiras());
+        model.addAttribute("karat", zalogjegy.getKarat());
+        model.addAttribute("dbSzam", zalogjegy.getDbSzam());
+        model.addAttribute("suly", zalogjegy.getSuly());
+        model.addAttribute("fizetendo", zalogjegyService.kivaltOsszeg(zalogjegy.getBeadas(), zalogjegy.getOsszeg()));
+
+
+        return "kivalt";
+    }
 
     @RequestMapping("/hosszabbit")
     public String hosszabbit(){

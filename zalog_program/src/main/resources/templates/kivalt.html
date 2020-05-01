@@ -8,40 +8,42 @@
 
 <div layout:fragment="content">
 
-    <form th:action="@{/kivaltas}">
+    <form name="kivalt" th:action="@{/kivaltKeres}" th:object="${zalogjegy}" method="post">
+
     <div class="form-row mt-5">
         <div class="input-group col-md-4 mb-4 col-md-4">
             <div class="input-group">
                 <span class="input-group-text">Zálogjegy sorszáma</span>
             </div>
-            <input type="number" class="form-control">
+            <input th:field="*{id}" type="number" class="form-control">
         </div>
 
         <div class="form-group col-md-3 mb-4">
             <div class="input-group-prepend">
                 <span class="input-group-text">Kölcsön összeg</span>
             </div>
-            <input type="number" class="form-control" placeholder="Ft">
+            <input th:field="*{osszeg}" type="number" class="form-control" placeholder="Ft">
         </div>
 
         <div class="form-group col-md-2 offset-md-2 mb-4">
             <button type="submit" class="btn btn-secondary btn-lg btn-block">OK</button>
         </div>
     </div>
+    </form>
 
     <div class="form-row mt-5">
         <div class="input-group mb-4 col-md-6">
             <div class="input-group">
                 <span class="input-group-text">Beadás dátuma</span>
             </div>
-            <input class="form-control" type="date" placeholder="DÁTUM" readonly>
+            <input th:value="${beadas}" class="form-control" type="text" placeholder="DÁTUM" readonly>
         </div>
 
         <div class="input-group mb-4 col-md-6">
             <div class="input-group">
                 <span class="input-group-text">Lejárat dátuma</span>
             </div>
-            <input class="form-control" type="date" placeholder="DÁTUM" readonly>
+            <input th:value="${lejarat}" class="form-control" type="text" placeholder="DÁTUM" readonly>
         </div>
     </div>
 
@@ -50,7 +52,7 @@
             <div class="input-group">
                 <span class="input-group-text">Zálogtárgy leírása</span>
             </div>
-            <textarea class="form-control" readonly></textarea>
+            <textarea th:text="${leiras}" class="form-control" readonly></textarea>
         </div>
     </div>
 
@@ -59,35 +61,35 @@
             <div class="input-group">
                 <span class="input-group-text" for="">Karát</span>
             </div>
-            <input type="text" class="form-control" readonly>
+            <input th:value="${karat}" type="text" class="form-control" readonly>
         </div>
 
         <div class="form-group col-md-3 mb-4">
             <div class="input-group-prepend">
                 <span class="input-group-text">Darabszám</span>
             </div>
-            <input type="text" class="form-control" placeholder="db" readonly>
+            <input th:value="${dbSzam}" type="text" class="form-control" placeholder="db" readonly>
         </div>
 
         <div class="form-group col-md-3 mb-4">
             <div class="input-group-prepend">
                 <span class="input-group-text">Súly</span>
             </div>
-            <input type="text" class="form-control" placeholder="g" readonly>
+            <input th:value="${suly}" type="text" class="form-control" placeholder="g" readonly>
         </div>
 
         <div class="form-group col-md-3 mb-4 offset-md-1">
             <div class="input-group-prepend">
                 <span class="input-group-text"><b>Fizetendő összeg</b></span>
             </div>
-            <input type="text" class="form-control" placeholder="Ft" readonly>
+            <input th:value="${fizetendo}" type="text" class="form-control" placeholder="Ft" readonly>
         </div>
     </div>
 
     <div class="form-row mt-5 mb-5">
         <button type="submit" class="btn btn-secondary btn-lg btn-block">Kiváltás</button>
     </div>
-    </form>
+
 
 </div>
 

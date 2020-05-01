@@ -29,7 +29,6 @@
 
             <div class="col-md-4 offset-md-2">
                 <select th:field="*{ugyfel}" id="inputState" class="form-control">
-
                     <option th:each="ugyfel : ${ugyfelek}"
                             th:value="${ugyfel.id}"
                             th:text="${ugyfel.nev}"></option>

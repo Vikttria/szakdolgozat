@@ -1,7 +1,7 @@
 package hu.vikttria.zalog_program.zaloghaz;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 public class Zalogjegy {
@@ -18,8 +18,8 @@ public class Zalogjegy {
     @Column(nullable = false)
     private int dbSzam;
     @Column(nullable = false)
-    private Date beadas;
-//    private Date lejarat;
+    private LocalDate beadas;
+//    private LocalDate lejarat;
     @Column(nullable = false)
     private int osszeg;
     @ManyToOne
@@ -32,7 +32,7 @@ public class Zalogjegy {
     public Zalogjegy() {
     }
 
-    public Zalogjegy(String leiras, int karat, double suly, int dbSzam, int osszeg, Date beadas, Ugyfel ugyfel){
+    public Zalogjegy(String leiras, int karat, double suly, int dbSzam, int osszeg, LocalDate beadas, Ugyfel ugyfel){
         this.leiras = leiras;
         this.karat = karat;
         this.suly = suly;
@@ -46,7 +46,7 @@ public class Zalogjegy {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -82,19 +82,19 @@ public class Zalogjegy {
         this.dbSzam = dbSzam;
     }
 
-    public Date getBeadas() {
+    public LocalDate getBeadas() {
         return beadas;
     }
 
-    public void setBeadas(Date beadas) {
+    public void setBeadas(LocalDate beadas) {
         this.beadas = beadas;
     }
 
-/*    public Date getLejarat() {
+/*    public LocalDate getLejarat() {
         return lejarat;
     }
 
-    public void setLejarat(Date lejarat) {
+    public void setLejarat(LocalDate lejarat) {
         this.lejarat = lejarat;
     }*/
 
