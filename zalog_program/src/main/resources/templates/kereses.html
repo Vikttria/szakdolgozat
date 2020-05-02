@@ -9,30 +9,32 @@
 <div layout:fragment="content">
 
     <!--űrlap-->
-    <div class="form-row mt-5">
-        <div class="col-md-4 offset-md-8">
-            <select id="inputState" class="form-control">
-                <option th:each="ugyfel : ${ugyfelek}"
-                        th:value="${ugyfel.nev}"
-                        th:text="${ugyfel.nev}"></option>
-            </select>
-        </div>
-    </div>
+
+    <form name="kereses" th:action="@{/kereses}" th:object="${zalogjegy}" method="post">
 
     <div class="form-row mt-5">
-        <div class="input-group mb-4 col-md-6">
+        <div class="input-group mb-4 col-md-3">
             <div class="input-group">
                 <span class="input-group-text">Beadás dátuma</span>
             </div>
-            <input class="form-control" type="date" placeholder="DÁTUM">
+            <input th:field="*{beadas}" class="form-control" type="date" placeholder="DÁTUM">
         </div>
 
-        <div class="input-group mb-4 col-md-6">
+        <div class="input-group mb-4 col-md-3 offset-md-1">
             <div class="input-group">
-                <span class="input-group-text">Lejárat dátuma</span>
+                <span class="input-group-text">Kiváltás dátuma</span>
             </div>
             <input class="form-control" type="date" placeholder="DÁTUM">
         </div>
+
+        <div class="col-md-4 offset-md-1">
+            <select th:field="*{ugyfel}" id="inputState" class="form-control">
+                <option th:each="ugyfel : ${ugyfelek}"
+                        th:value="${ugyfel.id}"
+                        th:text="${ugyfel.nev + ' (szig: ' + ugyfel.szig + ' )'}"></option>
+            </select>
+        </div>
+
     </div>
 
     <div class="form-row">
@@ -40,7 +42,7 @@
             <div class="input-group">
                 <span class="input-group-text">Zálogtárgy leírása</span>
             </div>
-            <textarea class="form-control"></textarea>
+            <textarea th:field="*{leiras}" class="form-control"></textarea>
         </div>
     </div>
 
@@ -49,7 +51,7 @@
             <div class="input-group">
                 <span class="input-group-text" for="">Karát</span>
             </div>
-            <select class="custom-select" id="">
+            <select th:field="*{karat}" class="custom-select" id="">
                 <option value="6">6</option>
                 <option value="8">8</option>
                 <option value="10">10</option>
@@ -62,47 +64,65 @@
             <div class="input-group-prepend">
                 <span class="input-group-text">Darabszám</span>
             </div>
-            <input type="number" min="1" class="form-control" placeholder="db">
+            <input th:field="*{dbSzam}" type="number" class="form-control" placeholder="db">
         </div>
 
         <div class="form-group col-md-3 mb-4">
             <div class="input-group-prepend">
                 <span class="input-group-text">Súly</span>
             </div>
-            <input type="number" step="0.01" min="0" class="form-control" placeholder="g">
+            <input th:field="*{suly}" type="number" step="0.01" min="0" class="form-control" placeholder="g">
         </div>
 
         <div class="form-group col-md-3 mb-4">
             <div class="input-group-prepend">
                 <span class="input-group-text">Kölcsön összeg</span>
             </div>
-            <input type="number" class="form-control" placeholder="Ft">
+            <input th:field="*{osszeg}" type="number" class="form-control" placeholder="Ft">
         </div>
     </div>
 
     <div class="form-row mt-5 mb-5">
         <button type="submit" class="btn btn-secondary btn-lg btn-block">Keresés</button>
     </div>
+    </form>
 
-</div>
 
 
 <!-- keresés eredménye -->
 <div class="container">
-    <table class="table table-hover">
+    <table class="table table-hover mb-5">
         <thead class="thead-light">
         <tr>
             <th scope="col">Zálogjegy sorszáma</th>
+            <th scope="col">Ügyfél</th>
+            <th scope="col">Beadás dátuma</th>
+            <th scope="col">Lejárat dátuma</th>
             <th scope="col">Leírás</th>
             <th scope="col">Db</th>
             <th scope="col">Súly</th>
             <th scope="col">Karát</th>
             <th scope="col">Kölcsön összeg</th>
+            <th scope="col">Kamat</th>
         </tr>
         </thead>
+        <tbody>
+            <tr th:each="zalogjegy : ${zalogjegyek}">
+                <th scope="row" th:text="${zalogjegy.id}"></th>
+                <td th:text="${zalogjegy.ugyfel.nev + ' (szig: ' + zalogjegy.ugyfel.szig + ' )'}"></td>
+                <td th:text="${zalogjegy.beadas}"></td>
+                <td th:text="${lejarat}"></td>
+                <td th:text="${zalogjegy.leiras}"></td>
+                <td th:text="${zalogjegy.dbSzam}"></td>
+                <td th:text="${zalogjegy.suly}"></td>
+                <td th:text="${zalogjegy.karat}"></td>
+                <td th:text="${zalogjegy.osszeg}"></td>
+                <td th:text="${kamat}"></td>
+            </tr>
+        </tbody>
     </table>
 </div>
 
-
+</div>
 </body>
 </html>

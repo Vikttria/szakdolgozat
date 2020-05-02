@@ -124,12 +124,26 @@ public class HomeController {
         return "hosszabbit";
 }
 
+/*
     @RequestMapping("/kereses")
     public String kereses(Model model) {
+        model.addAttribute("zalogjegy", new Zalogjegy());
         model.addAttribute("ugyfelek", ugyfelService.allUgyfel());
+        model.addAttribute("zalogjegyek", zalogjegyService.allZalogjegy());
 
         return "kereses";
     }
+
+    @RequestMapping(value = "/kereses", method = RequestMethod.POST)
+    public String keresesSubmit(@ModelAttribute Zalogjegy zalogjegy, Model model){
+        model.addAttribute("ugyfelek", ugyfelService.allUgyfel());
+        model.addAttribute("zalogjegyek", zalogjegyService.allZalogjegy());
+        model.addAttribute("lejarat", "...");
+        model.addAttribute("kamat", "...");
+
+
+        return "kereses";
+    }*/
 
     @RequestMapping("/bejelentkezes")
     public String bejelentkezes(){
