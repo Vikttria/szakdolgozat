@@ -15,16 +15,15 @@
             <div class="input-group mb-4 col-md-3">
                 <div class="input-group">
                     <span class="input-group-text">Beadás dátuma</span>
-                    <p><b th:text="${maiNap}"></b></p>
                 </div>
-
+                <input th:value="${maiNap}" class="form-control" type="text" placeholder="DÁTUM" readonly>
             </div>
 
             <div class="input-group mb-4 col-md-3">
                 <div class="input-group">
                     <span class="input-group-text">Lejárat dátuma</span>
-                    <p><b th:text="${lejarat}"></b></p>
                 </div>
+                <input th:value="${lejarat}" class="form-control" type="text" placeholder="DÁTUM" readonly>
             </div>
 
             <div class="col-md-4 offset-md-2">
