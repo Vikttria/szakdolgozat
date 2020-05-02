@@ -5,7 +5,7 @@ import javax.persistence.*;
 @Entity
 public class Megjegyzes {
 
-    @GeneratedValue
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Id
     private long id;
     private String megjegyzes;

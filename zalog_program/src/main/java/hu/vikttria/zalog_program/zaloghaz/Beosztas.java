@@ -6,7 +6,7 @@ import java.util.List;
 @Entity
 public class Beosztas {
 
-    @GeneratedValue
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Id
     private long id;
     private String munkakor;

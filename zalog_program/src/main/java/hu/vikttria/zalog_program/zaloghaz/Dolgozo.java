@@ -5,7 +5,7 @@ import javax.persistence.*;
 @Entity
 public class Dolgozo {
 
-    @GeneratedValue
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Id
     private long id;
     private String nev;

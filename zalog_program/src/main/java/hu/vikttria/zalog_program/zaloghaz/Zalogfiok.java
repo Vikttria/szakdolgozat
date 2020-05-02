@@ -7,7 +7,7 @@ import java.util.List;
 @Entity
 public class Zalogfiok {
 
-    @GeneratedValue
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Id
     private long id;
     private String cim;

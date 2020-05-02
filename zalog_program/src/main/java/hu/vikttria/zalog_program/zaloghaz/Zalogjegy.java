@@ -6,7 +6,7 @@ import java.time.LocalDate;
 @Entity
 public class Zalogjegy {
 
-    @GeneratedValue
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Id
     private long id;
     @Column(nullable = false)

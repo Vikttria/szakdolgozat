@@ -6,7 +6,7 @@ import java.util.List;
 @Entity
 public class Ugyfel {
 
-    @GeneratedValue
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Id
     private long id;
     @Column(nullable = false)
