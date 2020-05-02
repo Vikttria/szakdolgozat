@@ -29,8 +29,12 @@ public class ZalogjegyService {
         zalogjegyRepo.save(zalogjegy);
     }
 
-    public void kivaltZalog(Long id){
+    public void kivaltZalogjegy(Long id){
         zalogjegyRepo.deleteById(id);
+    }
+
+    public void hosszabbitZalogjegy(LocalDate beadas, long id){
+        zalogjegyRepo.setBeadasFor(beadas, id);
     }
 
     public Zalogjegy getZalogjegy(long id, int osszeg){
@@ -48,4 +52,10 @@ public class ZalogjegyService {
         return (int)kivaltOsszeg;
     }
 
+    public int hosszabbitOsszeg(LocalDate beadas, int kolcsonOsszeg) {
+        long napok = ChronoUnit.DAYS.between(beadas, LocalDate.now());
+        double hosszabbitOsszeg = (kolcsonOsszeg * napiKamat * napok) + (kolcsonOsszeg * kezelesiKoltseg);
+
+        return (int)hosszabbitOsszeg;
+    }
 }
