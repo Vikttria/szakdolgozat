@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.time.LocalDate;
-import java.util.Date;
-
 
 @Controller
 public class HomeController {
@@ -69,11 +67,12 @@ public class HomeController {
         return "kivalt";
     }
 
-    @RequestMapping(value = "/kivaltKeres", method = RequestMethod.POST)
+    @RequestMapping(value = "/kivalt", method = RequestMethod.POST, params = "action=ok")
     public String kivaltOkSubmit(@ModelAttribute Zalogjegy zalogjegy, Model model){
         log.info("kivált OK gomb");
         zalogjegy = zalogjegyService.getZalogjegy(zalogjegy.getId(), zalogjegy.getOsszeg());
 
+        model.addAttribute("ugyfel", zalogjegy.getUgyfel().getNev() + " (szig: " + zalogjegy.getUgyfel().getSzig() + ")");
         model.addAttribute("beadas", zalogjegy.getBeadas());
         model.addAttribute("lejarat", zalogjegyService.futamidoLejarta(zalogjegy.getBeadas()));
         model.addAttribute("leiras", zalogjegy.getLeiras());
@@ -82,6 +81,13 @@ public class HomeController {
         model.addAttribute("suly", zalogjegy.getSuly());
         model.addAttribute("fizetendo", zalogjegyService.kivaltOsszeg(zalogjegy.getBeadas(), zalogjegy.getOsszeg()));
 
+        return "kivalt";
+    }
+
+    @RequestMapping(value = "/kivalt", method = RequestMethod.POST, params = "action=kivalt")
+    public String kivaltSubmit(@ModelAttribute Zalogjegy zalogjegy){
+        zalogjegyService.kivaltZalog(zalogjegy.getId());
+        log.info("Kiváltás " + zalogjegy.getId());
 
         return "kivalt";
     }

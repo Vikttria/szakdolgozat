@@ -8,7 +8,7 @@
 
 <div layout:fragment="content">
 
-    <form name="kivalt" th:action="@{/kivaltKeres}" th:object="${zalogjegy}" method="post">
+    <form name="kivalt" th:action="@{/kivalt}" th:object="${zalogjegy}" method="post">
 
     <div class="form-row mt-5">
         <div class="input-group col-md-4 mb-4 col-md-4">
@@ -26,12 +26,21 @@
         </div>
 
         <div class="form-group col-md-2 offset-md-2 mb-4">
-            <button type="submit" class="btn btn-secondary btn-lg btn-block">OK</button>
+            <button type="submit" class="btn btn-secondary btn-lg btn-block" th:name="action" th:value="ok">OK</button>
         </div>
     </div>
-    </form>
+
 
     <div class="form-row mt-5">
+        <div class="input-group mb-4 col-md-7">
+            <div class="input-group">
+                <span class="input-group-text">Ügyfél</span>
+            </div>
+            <input th:value="${ugyfel}" class="form-control" type="text" readonly>
+        </div>
+    </div>
+
+    <div class="form-row">
         <div class="input-group mb-4 col-md-6">
             <div class="input-group">
                 <span class="input-group-text">Beadás dátuma</span>
@@ -87,9 +96,9 @@
     </div>
 
     <div class="form-row mt-5 mb-5">
-        <button type="submit" class="btn btn-secondary btn-lg btn-block">Kiváltás</button>
+        <button type="submit" class="btn btn-secondary btn-lg btn-block" th:name="action" th:value="kivalt">Kiváltás</button>
     </div>
-
+    </form>
 
 </div>
 

@@ -15,6 +15,10 @@ public class ZalogjegyService {
 
     ZalogjegyRepository zalogjegyRepo;
 
+    double kamat = 0.2;
+    double napiKamat = kamat / 90;
+    double kezelesiKoltseg = 0.05;
+
     @Autowired
     public void setZalogjegyRepo(ZalogjegyRepository zalogjegyRepo){
         this.zalogjegyRepo = zalogjegyRepo;
@@ -23,6 +27,10 @@ public class ZalogjegyService {
     public void ujZalog(String leiras, int karat, double suly, int dbSzam, int osszeg, LocalDate beadas, Ugyfel ugyfel){
         Zalogjegy zalogjegy = new Zalogjegy(leiras, karat, suly, dbSzam, osszeg, beadas, ugyfel);
         zalogjegyRepo.save(zalogjegy);
+    }
+
+    public void kivaltZalog(Long id){
+        zalogjegyRepo.deleteById(id);
     }
 
     public Zalogjegy getZalogjegy(long id, int osszeg){
@@ -34,8 +42,8 @@ public class ZalogjegyService {
     }
 
     public int kivaltOsszeg(LocalDate beadas, int kolcsonOsszeg){
-        long napok = ChronoUnit.DAYS.between(beadas, LocalDate.now().plusDays(1));
-        double kivaltOsszeg = kolcsonOsszeg + (kolcsonOsszeg * 0.2 / 90 * napok);
+        long napok = ChronoUnit.DAYS.between(beadas, LocalDate.now());
+        double kivaltOsszeg = kolcsonOsszeg + (kolcsonOsszeg * napiKamat * napok) + (kolcsonOsszeg * kezelesiKoltseg);
 
         return (int)kivaltOsszeg;
     }
