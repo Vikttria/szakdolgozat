@@ -73,13 +73,7 @@ public class HomeController {
         log.info("kivált OK gomb");
         zalogjegy = zalogjegyService.getZalogjegy(zalogjegy.getId(), zalogjegy.getOsszeg());
 
-        model.addAttribute("ugyfel", zalogjegy.getUgyfel().getNev() + " (szig: " + zalogjegy.getUgyfel().getSzig() + " )");
-        model.addAttribute("beadas", zalogjegy.getBeadas());
-        model.addAttribute("lejarat", zalogjegyService.futamidoLejarta(zalogjegy.getBeadas()));
-        model.addAttribute("leiras", zalogjegy.getLeiras());
-        model.addAttribute("karat", zalogjegy.getKarat());
-        model.addAttribute("dbSzam", zalogjegy.getDbSzam());
-        model.addAttribute("suly", zalogjegy.getSuly());
+        kezeles(zalogjegy, model);
         model.addAttribute("fizetendo", zalogjegyService.kivaltOsszeg(zalogjegy.getBeadas(), zalogjegy.getOsszeg()));
 
         return "kivalt";
@@ -105,13 +99,7 @@ public class HomeController {
         log.info("hosszabbit OK gomb");
         zalogjegy = zalogjegyService.getZalogjegy(zalogjegy.getId(), zalogjegy.getOsszeg());
 
-        model.addAttribute("ugyfel", zalogjegy.getUgyfel().getNev() + "\t(szig: " + zalogjegy.getUgyfel().getSzig() + " )");
-        model.addAttribute("beadas", zalogjegy.getBeadas());
-        model.addAttribute("lejarat", zalogjegyService.futamidoLejarta(zalogjegy.getBeadas()));
-        model.addAttribute("leiras", zalogjegy.getLeiras());
-        model.addAttribute("karat", zalogjegy.getKarat());
-        model.addAttribute("dbSzam", zalogjegy.getDbSzam());
-        model.addAttribute("suly", zalogjegy.getSuly());
+        kezeles(zalogjegy, model);
         model.addAttribute("fizetendo", zalogjegyService.hosszabbitOsszeg(zalogjegy.getBeadas(), zalogjegy.getOsszeg()));
 
         return "hosszabbit";
@@ -124,9 +112,20 @@ public class HomeController {
         return "hosszabbit";
 }
 
-    @RequestMapping(value = "/lekerdez")
+    @RequestMapping("/lekerdez")
     public String lekerdez(Model model){
         model.addAttribute("zalogjegy", new Zalogjegy());
+
+        return "lekerdez";
+    }
+
+    @RequestMapping(value = "/lekerdez", method = RequestMethod.POST)
+    public String okSubmit(@ModelAttribute Zalogjegy zalogjegy, Model model){
+        zalogjegy = zalogjegyService.getZalogjegy(zalogjegy.getId(), zalogjegy.getOsszeg());
+        kezeles(zalogjegy, model);
+
+        //model.addAttribute("hosszabbitas");
+        //model.addAttribute("kiváltás");
 
         return "lekerdez";
     }
@@ -177,4 +176,14 @@ public class HomeController {
         return "felvet";
     }
 
+
+    private void kezeles(@ModelAttribute Zalogjegy zalogjegy, Model model) {
+        model.addAttribute("ugyfel", zalogjegy.getUgyfel().getNev() + " (szig: " + zalogjegy.getUgyfel().getSzig() + " )");
+        model.addAttribute("beadas", zalogjegy.getBeadas());
+        model.addAttribute("lejarat", zalogjegyService.futamidoLejarta(zalogjegy.getBeadas()));
+        model.addAttribute("leiras", zalogjegy.getLeiras());
+        model.addAttribute("karat", zalogjegy.getKarat());
+        model.addAttribute("dbSzam", zalogjegy.getDbSzam());
+        model.addAttribute("suly", zalogjegy.getSuly());
+    }
 }
