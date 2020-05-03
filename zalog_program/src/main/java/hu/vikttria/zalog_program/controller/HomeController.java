@@ -124,6 +124,13 @@ public class HomeController {
         return "hosszabbit";
 }
 
+    @RequestMapping(value = "/lekerdez")
+    public String lekerdez(Model model){
+        model.addAttribute("zalogjegy", new Zalogjegy());
+
+        return "lekerdez";
+    }
+
 /*
     @RequestMapping("/kereses")
     public String kereses(Model model) {

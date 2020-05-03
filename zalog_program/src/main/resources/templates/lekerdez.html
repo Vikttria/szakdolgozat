@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="hu" layout:decorator="fragments/main" xmlns:layout="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Zálog-program</title>
+</head>
+<body>
+<div layout:fragment="content">
+
+    <form name="kivalt" th:action="@{/lekerdez}" th:object="${zalogjegy}" method="post">
+
+        <div class="form-row mt-5">
+            <div class="input-group col-md-3 mb-4">
+                <div class="input-group">
+                    <span class="input-group-text">Zálogjegy sorszáma</span>
+                </div>
+                <input th:field="*{id}" type="number" class="form-control">
+            </div>
+
+            <div class="input-group mb-4 col-md-3 offset-md-1">
+                <div class="input-group">
+                    <span class="input-group-text">Kiváltás dátuma</span>
+                </div>
+                <input class="form-control" type="date">
+            </div>
+
+        </div>
+
+        <div class="form-row">
+
+            <div class="form-group col-md-3 mb-4">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Kölcsön összeg</span>
+                </div>
+                <input th:field="*{osszeg}" type="number" class="form-control" placeholder="Ft">
+            </div>
+
+            <div class="form-group col-md-2 offset-md-5 mb-4">
+                <button type="submit" class="btn btn-secondary btn-lg btn-block" th:name="action" th:value="ok">OK</button>
+            </div>
+        </div>
+
+        <div class="form-row mt-5">
+            <div class="input-group mb-4 col-md-7">
+                <div class="input-group">
+                    <span class="input-group-text">Ügyfél</span>
+                </div>
+                <input th:value="${ugyfel}" class="form-control" type="text" readonly>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="input-group mb-4 col-md-6">
+                <div class="input-group">
+                    <span class="input-group-text">Beadás dátuma</span>
+                </div>
+                <input th:value="${beadas}" class="form-control" type="text" placeholder="DÁTUM" readonly>
+            </div>
+
+            <div class="input-group mb-4 col-md-6">
+                <div class="input-group">
+                    <span class="input-group-text">Lejárat dátuma</span>
+                </div>
+                <input th:value="${lejarat}" class="form-control" type="text" placeholder="DÁTUM" readonly>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="input-group mb-4">
+                <div class="input-group">
+                    <span class="input-group-text">Zálogtárgy leírása</span>
+                </div>
+                <textarea th:text="${leiras}" class="form-control" readonly></textarea>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="input-group col-md-2 mb-4">
+                <div class="input-group">
+                    <span class="input-group-text" for="">Karát</span>
+                </div>
+                <input th:value="${karat}" type="text" class="form-control" readonly>
+            </div>
+
+            <div class="form-group col-md-3 mb-4">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Darabszám</span>
+                </div>
+                <input th:value="${dbSzam}" type="text" class="form-control" placeholder="db" readonly>
+            </div>
+
+            <div class="form-group col-md-3 mb-4">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Súly</span>
+                </div>
+                <input th:value="${suly}" type="text" class="form-control" placeholder="g" readonly>
+            </div>
+
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-3 mb-4 offset-md-5">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><b>Hosszabbítás összege</b></span>
+                </div>
+                <input th:value="${hosszabbitas}" type="text" class="form-control" placeholder="Ft" readonly>
+            </div>
+
+            <div class="form-group col-md-3 mb-4 offset-md-1">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><b>Kiváltás összege</b></span>
+                </div>
+                <input th:value="${kivaltas}" type="text" class="form-control" placeholder="Ft" readonly>
+            </div>
+        </div>
+
+    </form>
+
+
+</div>
+</body>
+</html>
