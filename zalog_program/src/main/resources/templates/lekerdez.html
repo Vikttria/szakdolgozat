@@ -7,7 +7,7 @@
 <body>
 <div layout:fragment="content">
 
-    <form name="kivalt" th:action="@{/lekerdez}" th:object="${zalogjegy}" method="post">
+    <form name="kivalt" th:action="@{/lekerdez}" th:object="${zalogjegy}" th:attr="action=@{/lekerdez}" method="post">
 
         <div class="form-row mt-5">
             <div class="input-group col-md-3 mb-4">
@@ -21,7 +21,7 @@
                 <div class="input-group">
                     <span class="input-group-text">Kiváltás dátuma</span>
                 </div>
-                <input class="form-control" type="date">
+                <input th:name="kivaltDatum" th:value="${kivaltDatum}" class="form-control" type="date">
             </div>
 
         </div>

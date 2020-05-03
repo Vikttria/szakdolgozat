@@ -4,6 +4,7 @@ import hu.vikttria.zalog_program.service.UgyfelService;
 import hu.vikttria.zalog_program.service.ZalogjegyService;
 import hu.vikttria.zalog_program.zaloghaz.Ugyfel;
 import hu.vikttria.zalog_program.zaloghaz.Zalogjegy;
+import org.apache.tomcat.jni.Local;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
 
@@ -120,12 +122,14 @@ public class HomeController {
     }
 
     @RequestMapping(value = "/lekerdez", method = RequestMethod.POST)
-    public String okSubmit(@ModelAttribute Zalogjegy zalogjegy, Model model){
+    public String okSubmit(@ModelAttribute Zalogjegy zalogjegy, @RequestParam(value = "kivaltDatum") String kivaltDatum, Model model){
         zalogjegy = zalogjegyService.getZalogjegy(zalogjegy.getId(), zalogjegy.getOsszeg());
+
         kezeles(zalogjegy, model);
 
-        //model.addAttribute("hosszabbitas");
-        //model.addAttribute("kiváltás");
+        model.addAttribute("hosszabbitas", zalogjegyService.lekerKamatOsszeg(zalogjegy.getBeadas(), LocalDate.parse(kivaltDatum), zalogjegy.getOsszeg()));
+        model.addAttribute("kivaltas", zalogjegyService.lekerKivaltOsszeg(zalogjegy.getBeadas(), LocalDate.parse(kivaltDatum), zalogjegy.getOsszeg()));
+        model.addAttribute("kivaltDatum", kivaltDatum);
 
         return "lekerdez";
     }

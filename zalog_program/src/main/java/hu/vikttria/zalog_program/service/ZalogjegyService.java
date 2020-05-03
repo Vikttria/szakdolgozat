@@ -17,9 +17,10 @@ public class ZalogjegyService {
 
     ZalogjegyRepository zalogjegyRepo;
 
-    double kamat = 0.2;
-    double napiKamat = kamat / 90;
-    double kezelesiKoltseg = 0.05;
+    private final double kamat = 0.2;
+    private final double napiKamat = kamat / 90;
+    private final double kezelesiKoltseg = 0.05;
+
 
     @Autowired
     public void setZalogjegyRepo(ZalogjegyRepository zalogjegyRepo){
@@ -49,19 +50,32 @@ public class ZalogjegyService {
 
     public int kivaltOsszeg(LocalDate beadas, int kolcsonOsszeg){
         long napok = ChronoUnit.DAYS.between(beadas, LocalDate.now());
-        double kivaltOsszeg = kolcsonOsszeg + (kolcsonOsszeg * napiKamat * napok) + (kolcsonOsszeg * kezelesiKoltseg);
 
-        return (int)kivaltOsszeg;
+        return (int)(kolcsonOsszeg + (kolcsonOsszeg * napiKamat * napok) + (kolcsonOsszeg * kezelesiKoltseg));
     }
 
     public int hosszabbitOsszeg(LocalDate beadas, int kolcsonOsszeg) {
         long napok = ChronoUnit.DAYS.between(beadas, LocalDate.now());
-        double hosszabbitOsszeg = (kolcsonOsszeg * napiKamat * napok) + (kolcsonOsszeg * kezelesiKoltseg);
 
-        return (int)hosszabbitOsszeg;
+        return (int)((kolcsonOsszeg * napiKamat * napok) + (kolcsonOsszeg * kezelesiKoltseg));
     }
 
-    public List<Zalogjegy> allZalogjegy(){
+    public int lekerKivaltOsszeg(LocalDate beadas, LocalDate kivalt, int kolcsonOsszeg){
+        long napok = ChronoUnit.DAYS.between(beadas, kivalt);
+
+        return (int)(kolcsonOsszeg + (kolcsonOsszeg * napiKamat * napok) + (kolcsonOsszeg * kezelesiKoltseg));
+    }
+
+    public int lekerKamatOsszeg(LocalDate beadas, LocalDate kivaltDatum, int kolcsonOsszeg){
+        long napok = ChronoUnit.DAYS.between(beadas, kivaltDatum);
+
+        return (int)((kolcsonOsszeg * napiKamat * napok) + (kolcsonOsszeg * kezelesiKoltseg));
+    }
+
+
+
+   /* public List<Zalogjegy> allZalogjegy(){
         return new ArrayList<>(zalogjegyRepo.findAll());
-    }
+    }*/
+
 }
