@@ -13,14 +13,14 @@
             <div class="input-group">
                 <span class="input-group-text">Név</span>
             </div>
-            <input th:field="*{nev}" type="text" class="form-control">
+            <input th:field="*{nev}" type="text" required class="form-control">
         </div>
 
         <div class="input-group mb-4 col-md-5 offset-md-1">
             <div class="input-group">
                 <span class="input-group-text">Személyigazolvány szám</span>
             </div>
-            <input th:field="*{szig}" type="text" class="form-control">
+            <input th:field="*{szig}" type="text" minlength="8" required class="form-control">
         </div>
     </div>
 
@@ -29,7 +29,7 @@
             <div class="input-group">
                 <span class="input-group-text">Anyja neve</span>
             </div>
-            <input th:field="*{anyjaNeve}" type="text" class="form-control">
+            <input th:field="*{anyjaNeve}" type="text" required class="form-control">
         </div>
     </div>
 
@@ -38,7 +38,7 @@
             <div class="input-group">
                 <span class="input-group-text">Cím</span>
             </div>
-            <input th:field="*{cim}" type="text" class="form-control">
+            <input th:field="*{cim}" type="text" required class="form-control">
         </div>
     </div>
 

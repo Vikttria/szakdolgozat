@@ -4,7 +4,6 @@ import hu.vikttria.zalog_program.service.UgyfelService;
 import hu.vikttria.zalog_program.service.ZalogjegyService;
 import hu.vikttria.zalog_program.zaloghaz.Ugyfel;
 import hu.vikttria.zalog_program.zaloghaz.Zalogjegy;
-import org.apache.tomcat.jni.Local;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,11 +33,11 @@ public class HomeController {
         this.ugyfelService = ugyfelService;
     }
 
+
     @RequestMapping("/")
     public String home(){
         return "bejelentkezes";
     }
-
 
     @RequestMapping("/felvet")
     public String felvet(Model model){

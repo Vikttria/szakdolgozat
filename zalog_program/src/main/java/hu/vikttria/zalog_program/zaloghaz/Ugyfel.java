@@ -17,7 +17,6 @@ public class Ugyfel {
     private String anyjaNeve;
     @Column(nullable = false)
     private String cim;
-    @Column(unique = true)
     private String email;
     @OneToMany(mappedBy = "ugyfel")
     private List<Zalogjegy> zalogtargyak;
