@@ -1,8 +1,12 @@
 package hu.vikttria.zalog_program.controller;
 
+import hu.vikttria.zalog_program.service.DolgozoService;
 import hu.vikttria.zalog_program.service.UgyfelService;
+import hu.vikttria.zalog_program.service.ZalogfiokService;
 import hu.vikttria.zalog_program.service.ZalogjegyService;
+import hu.vikttria.zalog_program.zaloghaz.Dolgozo;
 import hu.vikttria.zalog_program.zaloghaz.Ugyfel;
+import hu.vikttria.zalog_program.zaloghaz.Zalogfiok;
 import hu.vikttria.zalog_program.zaloghaz.Zalogjegy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,6 +37,18 @@ public class HomeController {
         this.ugyfelService = ugyfelService;
     }
 
+    private ZalogfiokService fiokService;
+    @Autowired
+    public void setFiokService(ZalogfiokService fiokService) {
+        this.fiokService = fiokService;
+    }
+
+    private DolgozoService dolgozoService;
+    @Autowired
+    public void setDolgozoService(DolgozoService dolgozoService) {
+        this.dolgozoService = dolgozoService;
+    }
+
 
     @RequestMapping("/")
     public String home(){
@@ -45,6 +61,7 @@ public class HomeController {
         model.addAttribute("ugyfelek", ugyfelService.allUgyfel());
         model.addAttribute("maiNap", LocalDate.now());
         model.addAttribute("lejarat", LocalDate.now().plusDays(90));
+
         return "felvet";
     }
 
@@ -133,27 +150,6 @@ public class HomeController {
         return "lekerdez";
     }
 
-/*
-    @RequestMapping("/kereses")
-    public String kereses(Model model) {
-        model.addAttribute("zalogjegy", new Zalogjegy());
-        model.addAttribute("ugyfelek", ugyfelService.allUgyfel());
-        model.addAttribute("zalogjegyek", zalogjegyService.allZalogjegy());
-
-        return "kereses";
-    }
-
-    @RequestMapping(value = "/kereses", method = RequestMethod.POST)
-    public String keresesSubmit(@ModelAttribute Zalogjegy zalogjegy, Model model){
-        model.addAttribute("ugyfelek", ugyfelService.allUgyfel());
-        model.addAttribute("zalogjegyek", zalogjegyService.allZalogjegy());
-        model.addAttribute("lejarat", "...");
-        model.addAttribute("kamat", "...");
-
-
-        return "kereses";
-    }*/
-
     @RequestMapping("/bejelentkezes")
     public String bejelentkezes(){
         return "bejelentkezes";
@@ -210,6 +206,45 @@ public class HomeController {
         return "ugyfel";
     }
 
+    @RequestMapping("/zalogfiok")
+    public String zalogfiok(Model model){
+        model.addAttribute("zalogfiok", new Zalogfiok());
+        model.addAttribute("zalogfiokok", fiokService.allFiok());
+
+        return "zalogfiok";
+    }
+
+    @RequestMapping(value = "/zalogfiok", method = RequestMethod.POST)
+    public String zalogfiokUj(@ModelAttribute Zalogfiok zalogfiok, Model model){
+
+        fiokService.ujFiok(zalogfiok.getCim(), zalogfiok.getTelefon());
+
+        model.addAttribute("zalogfiok", new Zalogfiok());
+        model.addAttribute("zalogfiokok", fiokService.allFiok());
+
+        return "zalogfiok";
+    }
+
+    @RequestMapping("/dolgozo")
+    public String dolgozo(Model model){
+        model.addAttribute("dolgozo", new Dolgozo());
+        model.addAttribute("dolgozok", dolgozoService.allDolgozo());
+        model.addAttribute("zalogfiokok", fiokService.allFiok());
+
+        return "dolgozo";
+    }
+
+    @RequestMapping(value = "/dolgozo", method = RequestMethod.POST)
+    public String dolgozoUj(@ModelAttribute Dolgozo dolgozo, Model model){
+
+        dolgozoService.ujDolgozo(dolgozo.getNev(), dolgozo.getTelefon(), dolgozo.getEmail(), dolgozo.getZalogfiok());
+
+        model.addAttribute("dolgozo", new Dolgozo());
+        model.addAttribute("dolgozok", dolgozoService.allDolgozo());
+
+        return "dolgozo";
+    }
+
 
     private void kezeles(@ModelAttribute Zalogjegy zalogjegy, Model model) {
         model.addAttribute("ugyfel", zalogjegy.getUgyfel().getNev() + " (szig: " + zalogjegy.getUgyfel().getSzig() + " )");
@@ -220,4 +255,26 @@ public class HomeController {
         model.addAttribute("dbSzam", zalogjegy.getDbSzam());
         model.addAttribute("suly", zalogjegy.getSuly());
     }
+
+
+    /*
+    @RequestMapping("/kereses")
+    public String kereses(Model model) {
+        model.addAttribute("zalogjegy", new Zalogjegy());
+        model.addAttribute("ugyfelek", ugyfelService.allUgyfel());
+        model.addAttribute("zalogjegyek", zalogjegyService.allZalogjegy());
+
+        return "kereses";
+    }
+
+    @RequestMapping(value = "/kereses", method = RequestMethod.POST)
+    public String keresesSubmit(@ModelAttribute Zalogjegy zalogjegy, Model model){
+        model.addAttribute("ugyfelek", ugyfelService.allUgyfel());
+        model.addAttribute("zalogjegyek", zalogjegyService.allZalogjegy());
+        model.addAttribute("lejarat", "...");
+        model.addAttribute("kamat", "...");
+
+
+        return "kereses";
+    }*/
 }

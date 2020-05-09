@@ -19,6 +19,11 @@ public class Zalogfiok {
 
     public Zalogfiok(){}
 
+    public Zalogfiok(String cim, String telefon){
+        this.cim = cim;
+        this.telefon = telefon;
+    }
+
     public long getId() {
         return id;
     }

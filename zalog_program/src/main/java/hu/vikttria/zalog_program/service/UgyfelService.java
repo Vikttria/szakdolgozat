@@ -18,6 +18,7 @@ public class UgyfelService {
         this.ugyfelRepo = ugyfelRepo;
     }
 
+
     public void ujUgyfel(String nev, String anyjaNeve, String szig, String cim, String email){
         Ugyfel ugyfel = new Ugyfel(nev, anyjaNeve, szig, cim, email);
 

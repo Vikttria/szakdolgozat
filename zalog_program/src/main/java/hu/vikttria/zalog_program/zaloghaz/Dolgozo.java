@@ -9,12 +9,21 @@ public class Dolgozo {
     @Id
     private long id;
     private String nev;
+    private String telefon;
+    private String email;
     @ManyToOne
     private Beosztas beosztas;
     @ManyToOne
     private Zalogfiok zalogfiok;
 
     public Dolgozo(){}
+
+    public Dolgozo(String nev, String telefon, String email, Zalogfiok zalogfiok){
+        this.nev = nev;
+        this.telefon = telefon;
+        this.email = email;
+        this.zalogfiok = zalogfiok;
+    }
 
     public long getId() {
         return id;
@@ -50,5 +59,21 @@ public class Dolgozo {
 
     public void setBeosztas(Beosztas beosztas) {
         this.beosztas = beosztas;
+    }
+
+    public String getTelefon() {
+        return telefon;
+    }
+
+    public void setTelefon(String telefon) {
+        this.telefon = telefon;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

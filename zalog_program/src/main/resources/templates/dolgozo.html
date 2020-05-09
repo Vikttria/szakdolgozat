@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="hu" layout:decorator="fragments/main" xmlns:layout="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Zálog-program</title>
+</head>
+<body>
+<div layout:fragment="content">
+
+    <form name="dolgozo" th:action="@{/dolgozo}" th:object="${dolgozo}" method="post">
+
+        <div class="form-row mt-5">
+            <div class="input-group mb-4 col-md-5">
+                <div class="input-group">
+                    <span class="input-group-text">Név</span>
+                </div>
+                <input th:field="*{nev}" type="text" required class="form-control">
+            </div>
+
+            <div class="input-group mb-4 col-md-5 offset-md-1">
+                <div class="input-group">
+                    <span class="input-group-text">Telefonszám</span>
+                </div>
+                <input th:field="*{telefon}" type="text" required class="form-control">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="input-group mb-4 col-md-5">
+                <div class="input-group">
+                    <span class="input-group-text">E-mail cím:</span>
+                </div>
+                <input th:field="*{email}" type="text" required class="form-control">
+            </div>
+
+            <div class="input-group col-md-5 mb-4 offset-md-1">
+                <div class="input-group">
+                    <span class="input-group-text" for="">Zálogfiók</span>
+                </div>
+                <select th:field="*{zalogfiok}" id="inputState" class="form-control">
+                    <option th:each="zalogfiok : ${zalogfiokok}"
+                            th:value="${zalogfiok.id}"
+                            th:text="${zalogfiok.cim}"></option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-row mt-5 mb-5">
+            <div class="col-md-4 offset-md-8">
+                <button type="submit" class="btn btn-secondary btn-lg btn-block">Új Dolgozó</button>
+            </div>
+        </div>
+    </form>
+
+    <div class="container">
+        <table class="table table-hover mb-5">
+            <thead class="thead-light">
+            <tr>
+                <th scope="col">Név</th>
+                <th scope="col">Telefonszám</th>
+                <th scope="col">E-mail cím</th>
+                <th scope="col">Zálogfiók</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="dolgozo : ${dolgozok}">
+                <td th:text="${dolgozo.nev}"></td>
+                <td th:text="${dolgozo.telefon}"></td>
+                <td th:text="${dolgozo.email}"></td>
+                <td th:text="${dolgozo.zalogfiok.cim}"></td>
+
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+</body>
+</html>
