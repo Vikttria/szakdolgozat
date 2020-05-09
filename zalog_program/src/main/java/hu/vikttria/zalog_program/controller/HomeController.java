@@ -225,6 +225,16 @@ public class HomeController {
         return "zalogfiok";
     }
 
+    @RequestMapping(value = "/fiokTorol", method = RequestMethod.POST)
+    public String fiokTorol(@ModelAttribute Zalogfiok fiok, Model model){
+
+        fiokService.fiokTorol(fiok.getId());
+        model.addAttribute("zalogfiok", new Zalogfiok());
+        model.addAttribute("zalogfiokok", fiokService.allFiok());
+
+        return "zalogfiok";
+    }
+
     @RequestMapping("/dolgozo")
     public String dolgozo(Model model){
         model.addAttribute("dolgozo", new Dolgozo());

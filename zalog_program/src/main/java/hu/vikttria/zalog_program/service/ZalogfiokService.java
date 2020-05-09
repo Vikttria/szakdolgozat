@@ -28,4 +28,8 @@ public class ZalogfiokService {
         return new ArrayList<>(fiokRepo.findAll());
     }
 
+    public void fiokTorol(long id){
+        fiokRepo.deleteById(id);
+    }
+
 }

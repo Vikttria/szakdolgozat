@@ -51,6 +51,25 @@
         </table>
     </div>
 
+    <form name="torol" th:action="@{/fiokTorol}" th:object="${zalogfiok}" method="post">
+        <div class="form-row mt-5">
+            <div class="input-group mb-4 col-md-5">
+                <div class="input-group">
+                    <span class="input-group-text">Cím</span>
+                </div>
+                <select th:field="*{id}" class="form-control">
+                    <option th:each="fiok : ${zalogfiokok}"
+                            th:value="${fiok.id}"
+                            th:text="${fiok.cim}"></option>
+                </select>
+            </div>
+
+            <div class="col-md-4 offset-md-8 mb-5">
+                <button type="submit" class="btn btn-secondary btn-lg btn-block">Zálogfiók törlése</button>
+            </div>
+        </div>
+    </form>
+
 </div>
 </body>
 </html>
