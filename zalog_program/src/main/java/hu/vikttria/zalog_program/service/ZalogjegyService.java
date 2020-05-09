@@ -3,11 +3,13 @@ package hu.vikttria.zalog_program.service;
 import hu.vikttria.zalog_program.repository.ZalogjegyRepository;
 import hu.vikttria.zalog_program.zaloghaz.Ugyfel;
 import hu.vikttria.zalog_program.zaloghaz.Zalogjegy;
+import org.apache.catalina.LifecycleState;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
 
 
 @Service
@@ -68,6 +70,14 @@ public class ZalogjegyService {
         long napok = ChronoUnit.DAYS.between(beadas, kivaltDatum);
 
         return (int)((kolcsonOsszeg * napiKamat * napok) + (kolcsonOsszeg * kezelesiKoltseg));
+    }
+
+    public List<Zalogjegy> ugyfelId(long id){
+        return zalogjegyRepo.findByUgyfelId(id);
+    }
+
+    public Zalogjegy zalogjegyId(long id){
+        return  zalogjegyRepo.findById(id);
     }
 
 

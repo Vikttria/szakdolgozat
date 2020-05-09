@@ -28,6 +28,10 @@ public class UgyfelService {
         return new ArrayList<>(ugyfelRepo.findAll());
     }
 
+    public List<Ugyfel> ugyfelId(long id) {
+        return new ArrayList<>(ugyfelRepo.findById(id));
+    }
+
     @PostConstruct
     public void init(){
         Ugyfel ugyfel = new Ugyfel("Anonymous", "", "", "", "");

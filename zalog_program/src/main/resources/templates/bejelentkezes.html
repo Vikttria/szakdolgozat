@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="hu" layout:decorator="fragments/main" xmlns:layout="http://www.w3.org/1999/xhtml">
+<html lang="hu" layout:decorator="fragments/main" xmlns:layout="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <title>Zálog-program</title>
 </head>
@@ -7,16 +8,20 @@
 
 <div layout:fragment="content">
 
-    <div class="form-row mt-5">
+    <form name="bejelentkezes" th:action="@{/bejelentkezes}" method="post">
+        <div th:if="${param.error}" class="alert alert-danger offset-md-1 mt-4 col-md-4">Hibás felhasználói név és jelszó!</div>
+        <div th:if="${param.kijelentkezes}" class="alert alert-success offset-md-1 mt-4 col-md-4">Sikeresen kijelentkeztél</div>
+
+        <div class="form-row mt-5">
         <div class="input-group mb-4 col-md-4 offset-md-1">
             <div class="input-group">
-                <span class="input-group-text">Név</span>
+                <span class="input-group-text">Felhasználói név</span>
             </div>
-            <input type="text" class="form-control">
+            <input type="text" class="form-control" required="true">
         </div>
     </div>
 
-    <div class="form-row">
+<!--    <div class="form-row">
         <div class="input-group col-md-2 offset-md-1 mb-4">
             <div class="input-group">
                 <span class="input-group-text" for="">Zálogfiók</span>
@@ -28,14 +33,14 @@
                 <option value="4">4.számú Zálogfiók</option>
             </select>
         </div>
-    </div>
+    </div>-->
 
     <div class="form-row">
         <div class="input-group mb-4 col-md-4 offset-md-1">
             <div class="input-group">
                 <span class="input-group-text">Jelszó</span>
             </div>
-            <input type="password" class="form-control" id="exampleInputPassword1">
+            <input type="password" class="form-control" id="exampleInputPassword1" required="true">
         </div>
     </div>
 
@@ -45,8 +50,9 @@
         </div>
     </div>
 
+    </form>
+
+
 </div>
-
-
 </body>
 </html>

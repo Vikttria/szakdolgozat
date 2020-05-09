@@ -25,7 +25,6 @@
                 </div>
                 <input th:value="${lejarat}" class="form-control" type="text" placeholder="DÁTUM" readonly>
             </div>
-
             <div class="col-md-4 offset-md-2">
                 <select th:field="*{ugyfel}" id="inputState" class="form-control">
                     <option th:each="ugyfel : ${ugyfelek}"
@@ -49,7 +48,7 @@
                 <div class="input-group">
                     <span class="input-group-text" for="">Karát</span>
                 </div>
-                <select th:field="*{karat}" class="custom-select" id="">
+                <select th:field="*{karat}" class="form-control" id="">
                     <option value="6">6</option>
                     <option value="8">8</option>
                     <option value="10">10</option>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="hu" layout:decorator="fragments/main" xmlns:layout="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Zálog-program</title>
+</head>
+<body>
+<div layout:fragment="content">
+
+    <form name="ugyfel" th:action="@{/ugyfel}" th:object="${ugyfel}" method="post">
+
+        <div class="form-row mt-5">
+            <div class="col-md-3 mb-4">
+            <div class="input-group">
+                <span class="input-group-text">Zálogjegy sorszáma</span>
+            </div>
+            <select th:name="zalogId" th:value="${zalogId}" id="inputState" class="form-control">
+                <option th:each="zalog : ${zalogok}"
+                        th:value="${zalog.id}"
+                        th:text="${zalog.id}"></option>
+            </select>
+            </div>
+
+
+        <div class="input-group mb-4 col-md-3 offset-md-1">
+            <div class="input-group">
+                <span class="input-group-text">Kiváltás dátuma</span>
+            </div>
+            <input th:name="kivaltDatum" th:value="${kivaltDatum}" class="form-control" type="date" required>
+        </div>
+
+
+        <div class="form-group col-md-2 offset-md-2 mb-4">
+            <button type="submit" class="btn btn-secondary btn-lg btn-block">OK</button>
+        </div>
+        </div>
+
+        <div class="mt-5 mb-5">
+
+            <p><b>Zálogfiók címe: </b><span th:text="${cim}">Zálogfiók címe</span></p>
+            <p><b>Zálogfiók telefonszáma: </b><span th:text="${tel}">Zálogfiók telefonszáma</span></p>
+            <br>
+            <p><b>Elzálogosítás összege: </b><span th:text="${beadOsszeg}">összeg</span></p>
+            <p><b>Elzálogosítás dátuma: </b><span th:text="${beadDatum}">dátum</span></p>
+            <p><b>Lejárat dátuma: </b><span th:text="${lejarDatum}">dátum</span></p>
+            <p><b>Zálogtárgy leíras: </b><span th:text="${leiras}">leírás</span></p>
+            <br>
+            <p><b>Hosszabbítás összege: </b><span th:text="${kamat}">kamat összeg</span></p>
+            <p><b>Kiváltás összege: </b><span th:text="${kivaltas}">elzálog összeg + kamat összeg</span></p>
+
+        </div>
+
+    </form>
+
+
+
+
+
+</div>
+</body>
+</html>

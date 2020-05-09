@@ -179,6 +179,37 @@ public class HomeController {
         return "felvet";
     }
 
+    @RequestMapping(value = "/ugyfel")
+    public String ugyfel(Model model){
+        model.addAttribute("ugyfel", new Ugyfel());
+        model.addAttribute("zalogok", zalogjegyService.ugyfelId(2));
+
+        return "ugyfel";
+    }
+
+    @RequestMapping(value = "/ugyfel", method = RequestMethod.POST)
+    public String ugyfel(@ModelAttribute Ugyfel ugyfel,
+                         @RequestParam(value = "kivaltDatum") String kivaltDatum,
+                         @RequestParam(value = "zalogId") String zalogId,
+                         Model model){
+        Zalogjegy zalogjegy = zalogjegyService.zalogjegyId(Long.parseLong(zalogId));
+
+        model.addAttribute("ugyfel", new Ugyfel());
+        model.addAttribute("zalogjegy", new Zalogjegy());
+        model.addAttribute("zalogok", zalogjegyService.ugyfelId(2));
+
+        model.addAttribute("cim", zalogjegy.getZalogfiok().getCim());
+        model.addAttribute("tel", zalogjegy.getZalogfiok().getTelefon());
+        model.addAttribute("beadOsszeg", zalogjegy.getOsszeg());
+        model.addAttribute("beadDatum", zalogjegy.getBeadas());
+        model.addAttribute("lejarDatum", zalogjegyService.futamidoLejarta(zalogjegy.getBeadas()));
+        model.addAttribute("leiras", zalogjegy.getLeiras());
+        model.addAttribute("kamat", zalogjegyService.lekerKamatOsszeg(zalogjegy.getBeadas(), LocalDate.parse(kivaltDatum), zalogjegy.getOsszeg()));
+        model.addAttribute("kivaltas", zalogjegyService.lekerKivaltOsszeg(zalogjegy.getBeadas(), LocalDate.parse(kivaltDatum), zalogjegy.getOsszeg()));
+
+        return "ugyfel";
+    }
+
 
     private void kezeles(@ModelAttribute Zalogjegy zalogjegy, Model model) {
         model.addAttribute("ugyfel", zalogjegy.getUgyfel().getNev() + " (szig: " + zalogjegy.getUgyfel().getSzig() + " )");

@@ -26,8 +26,6 @@ public class Zalogjegy {
     private Zalogfiok zalogfiok;
     @ManyToOne
     private Ugyfel ugyfel;
-    @OneToOne
-    private Megjegyzes megjegyzes;
 
     public Zalogjegy() {
     }
@@ -122,19 +120,4 @@ public class Zalogjegy {
         this.ugyfel = ugyfel;
     }
 
-    public Megjegyzes getMegjegyzesId() {
-        return megjegyzes;
-    }
-
-    public void setMegjegyzesId(Megjegyzes megjegyzesId) {
-        this.megjegyzes = megjegyzesId;
-    }
-
-    public Megjegyzes getMegjegyzes() {
-        return megjegyzes;
-    }
-
-    public void setMegjegyzes(Megjegyzes megjegyzes) {
-        this.megjegyzes = megjegyzes;
-    }
 }

@@ -15,7 +15,11 @@ public interface ZalogjegyRepository extends CrudRepository<Zalogjegy, Long> {
 
     List<Zalogjegy> findAll();
 
+    List<Zalogjegy> findByUgyfelId(long id);
+
     Zalogjegy findFirstByIdAndOsszeg(long id, int osszeg);
+
+    Zalogjegy findById(long id);
 
     @Transactional
     @Modifying

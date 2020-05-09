@@ -9,4 +9,6 @@ public interface UgyfelRepository extends CrudRepository<Ugyfel, Long> {
 
     List<Ugyfel> findAll();
 
+    List<Ugyfel> findById(long id);
+
 }
