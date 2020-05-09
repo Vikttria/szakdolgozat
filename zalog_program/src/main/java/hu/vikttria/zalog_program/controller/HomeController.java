@@ -1,9 +1,6 @@
 package hu.vikttria.zalog_program.controller;
 
-import hu.vikttria.zalog_program.service.DolgozoService;
-import hu.vikttria.zalog_program.service.UgyfelService;
-import hu.vikttria.zalog_program.service.ZalogfiokService;
-import hu.vikttria.zalog_program.service.ZalogjegyService;
+import hu.vikttria.zalog_program.service.*;
 import hu.vikttria.zalog_program.zaloghaz.Dolgozo;
 import hu.vikttria.zalog_program.zaloghaz.Ugyfel;
 import hu.vikttria.zalog_program.zaloghaz.Zalogfiok;
@@ -47,6 +44,12 @@ public class HomeController {
     @Autowired
     public void setDolgozoService(DolgozoService dolgozoService) {
         this.dolgozoService = dolgozoService;
+    }
+
+    private BeosztasService beosztasService;
+    @Autowired
+    public void setBeosztasService(BeosztasService beosztasService) {
+        this.beosztasService = beosztasService;
     }
 
 
@@ -240,6 +243,7 @@ public class HomeController {
         model.addAttribute("dolgozo", new Dolgozo());
         model.addAttribute("dolgozok", dolgozoService.allDolgozo());
         model.addAttribute("zalogfiokok", fiokService.allFiok());
+        model.addAttribute("beosztasok", beosztasService.allBeosztas());
 
         return "dolgozo";
     }
@@ -252,6 +256,7 @@ public class HomeController {
         model.addAttribute("dolgozo", new Dolgozo());
         model.addAttribute("dolgozok", dolgozoService.allDolgozo());
         model.addAttribute("zalogfiokok", fiokService.allFiok());
+        model.addAttribute("beosztasok", beosztasService.allBeosztas());
 
         return "dolgozo";
     }
@@ -262,6 +267,7 @@ public class HomeController {
         model.addAttribute("dolgozo", new Dolgozo());
         model.addAttribute("dolgozok", dolgozoService.allDolgozo());
         model.addAttribute("zalogfiokok", fiokService.allFiok());
+        model.addAttribute("beosztasok", beosztasService.allBeosztas());
 
         return "dolgozo";
     }

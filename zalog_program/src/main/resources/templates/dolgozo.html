@@ -45,7 +45,21 @@
             </div>
         </div>
 
-        <div class="form-row mt-5 mb-5">
+        <div class="form-row mb-5">
+            <div class="input-group col-md-5 mb-4">
+                <div class="input-group">
+                    <span class="input-group-text" for="">Beosztás</span>
+                </div>
+                <select th:field="*{beosztas}" class="form-control">
+                    <option th:each="beosztas : ${beosztasok}"
+                            th:value="${beosztas.id}"
+                            th:text="${beosztas.munkakor}"></option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-row mb-5">
+
             <div class="col-md-4 offset-md-8">
                 <button type="submit" class="btn btn-secondary btn-lg btn-block">Új Dolgozó</button>
             </div>
@@ -61,6 +75,7 @@
                 <th scope="col">Telefonszám</th>
                 <th scope="col">E-mail cím</th>
                 <th scope="col">Zálogfiók</th>
+                <th scope="col">Munkakör</th>
             </tr>
             </thead>
             <tbody>
@@ -69,6 +84,7 @@
                 <td th:text="${dolgozo.telefon}"></td>
                 <td th:text="${dolgozo.email}"></td>
                 <td th:text="${dolgozo.zalogfiok.cim}"></td>
+                <td th:text="${dolgozo.beosztas.munkakor}"></td>
             </tr>
             </tbody>
         </table>
