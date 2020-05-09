@@ -241,6 +241,17 @@ public class HomeController {
 
         model.addAttribute("dolgozo", new Dolgozo());
         model.addAttribute("dolgozok", dolgozoService.allDolgozo());
+        model.addAttribute("zalogfiokok", fiokService.allFiok());
+
+        return "dolgozo";
+    }
+
+    @RequestMapping(value = "/dolgozoTorol", method = RequestMethod.POST)
+    public String dolgozoTorol(@ModelAttribute Dolgozo dolgozo, Model model){
+        dolgozoService.dolgozoTorol(dolgozo.getId());
+        model.addAttribute("dolgozo", new Dolgozo());
+        model.addAttribute("dolgozok", dolgozoService.allDolgozo());
+        model.addAttribute("zalogfiokok", fiokService.allFiok());
 
         return "dolgozo";
     }

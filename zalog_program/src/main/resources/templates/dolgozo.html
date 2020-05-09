@@ -50,6 +50,7 @@
                 <button type="submit" class="btn btn-secondary btn-lg btn-block">Új Dolgozó</button>
             </div>
         </div>
+
     </form>
 
     <div class="container">
@@ -68,11 +69,31 @@
                 <td th:text="${dolgozo.telefon}"></td>
                 <td th:text="${dolgozo.email}"></td>
                 <td th:text="${dolgozo.zalogfiok.cim}"></td>
-
             </tr>
             </tbody>
         </table>
     </div>
+
+
+    <form name="torol" th:action="@{/dolgozoTorol}" th:object="${dolgozo}" method="post">
+        <div class="form-row mt-5">
+            <div class="input-group mb-4 col-md-5">
+                <div class="input-group">
+                    <span class="input-group-text">Név</span>
+                </div>
+                <select th:field="*{id}" class="form-control">
+                    <option th:each="dolgozo : ${dolgozok}"
+                            th:value="${dolgozo.id}"
+                            th:text="${dolgozo.nev}"></option>
+                </select>
+            </div>
+
+            <div class="col-md-4 offset-md-8 mb-5">
+                <button type="submit" class="btn btn-secondary btn-lg btn-block">Dolgozó törlése</button>
+            </div>
+        </div>
+    </form>
+
 
 </div>
 </body>

@@ -28,4 +28,8 @@ public class DolgozoService {
     public List<Dolgozo> allDolgozo(){
         return new ArrayList<>(dolgozoRepo.findAll());
     }
+
+    public void dolgozoTorol(long id){
+        dolgozoRepo.deleteById(id);
+    }
 }
