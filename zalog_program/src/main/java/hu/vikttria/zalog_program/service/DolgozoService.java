@@ -27,7 +27,7 @@ public class DolgozoService {
     }
 
     public List<Dolgozo> allDolgozo(){
-        return new ArrayList<>(dolgozoRepo.findAll());
+        return new ArrayList<>(dolgozoRepo.findAllByOrderByNev());
     }
 
     public void dolgozoTorol(long id){

@@ -71,6 +71,7 @@
         <table class="table table-hover mb-5">
             <thead class="thead-light">
             <tr>
+                <th scope="col">Id</th>
                 <th scope="col">Név</th>
                 <th scope="col">Telefonszám</th>
                 <th scope="col">E-mail cím</th>
@@ -80,6 +81,7 @@
             </thead>
             <tbody>
             <tr th:each="dolgozo : ${dolgozok}">
+                <td th:text="${dolgozo.id}"></td>
                 <td th:text="${dolgozo.nev}"></td>
                 <td th:text="${dolgozo.telefon}"></td>
                 <td th:text="${dolgozo.email}"></td>
@@ -100,7 +102,7 @@
                 <select th:field="*{id}" class="form-control">
                     <option th:each="dolgozo : ${dolgozok}"
                             th:value="${dolgozo.id}"
-                            th:text="${dolgozo.nev}"></option>
+                            th:text="${dolgozo.id + '. ' + dolgozo.nev}"></option>
                 </select>
             </div>
 

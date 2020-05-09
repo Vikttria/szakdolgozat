@@ -26,7 +26,7 @@ public class UgyfelService {
     }
 
     public List<Ugyfel> allUgyfel() {
-        return new ArrayList<>(ugyfelRepo.findAll());
+        return new ArrayList<>(ugyfelRepo.findAllByOrderByNev());
     }
 
     public List<Ugyfel> ugyfelId(long id) {

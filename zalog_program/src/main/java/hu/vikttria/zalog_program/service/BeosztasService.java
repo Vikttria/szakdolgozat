@@ -18,7 +18,7 @@ public class BeosztasService {
     }
 
     public List<Beosztas> allBeosztas(){
-        return new ArrayList<>(beosztasRepo.findAll());
+        return new ArrayList<>(beosztasRepo.findAllByOrderByMunkakor());
     }
 
 }

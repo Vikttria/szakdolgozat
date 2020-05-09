@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface DolgozoReposiroty extends CrudRepository<Dolgozo, Long> {
 
-    List<Dolgozo> findAll();
+    List<Dolgozo> findAllByOrderByNev();
 }
