@@ -18,11 +18,12 @@ public class Dolgozo {
 
     public Dolgozo(){}
 
-    public Dolgozo(String nev, String telefon, String email, Zalogfiok zalogfiok){
+    public Dolgozo(String nev, String telefon, String email, Zalogfiok zalogfiok, Beosztas beosztas){
         this.nev = nev;
         this.telefon = telefon;
         this.email = email;
         this.zalogfiok = zalogfiok;
+        this.beosztas = beosztas;
     }
 
     public long getId() {

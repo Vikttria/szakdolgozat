@@ -251,7 +251,7 @@ public class HomeController {
     @RequestMapping(value = "/dolgozo", method = RequestMethod.POST)
     public String dolgozoUj(@ModelAttribute Dolgozo dolgozo, Model model){
 
-        dolgozoService.ujDolgozo(dolgozo.getNev(), dolgozo.getTelefon(), dolgozo.getEmail(), dolgozo.getZalogfiok());
+        dolgozoService.ujDolgozo(dolgozo.getNev(), dolgozo.getTelefon(), dolgozo.getEmail(), dolgozo.getZalogfiok(), dolgozo.getBeosztas());
 
         model.addAttribute("dolgozo", new Dolgozo());
         model.addAttribute("dolgozok", dolgozoService.allDolgozo());
