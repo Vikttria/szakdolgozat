@@ -25,4 +25,14 @@ public interface ZalogjegyRepository extends CrudRepository<Zalogjegy, Long> {
     @Modifying
     @Query(value = "UPDATE Zalogjegy z SET z.beadas = :datum WHERE z.id = :id")
     int setBeadasFor(@Param("datum") LocalDate beadas, @Param("id") long id);
+
+    List<Zalogjegy> findZalogjegyByBeadasBefore(LocalDate datum);
+
+
+    @Transactional
+    @Modifying
+    @Query(value = "DELETE FROM Zalogjegy z WHERE z.beadas <= :datum")
+    void torolDatumElott(@Param("datum") LocalDate beadas);
+
+    //void deleteZalogjegyByBeadasBefore(LocalDate datum);
 }

@@ -3,12 +3,12 @@ package hu.vikttria.zalog_program.service;
 import hu.vikttria.zalog_program.repository.ZalogjegyRepository;
 import hu.vikttria.zalog_program.zaloghaz.Ugyfel;
 import hu.vikttria.zalog_program.zaloghaz.Zalogjegy;
-import org.apache.catalina.LifecycleState;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -26,6 +26,7 @@ public class ZalogjegyService {
     public void setZalogjegyRepo(ZalogjegyRepository zalogjegyRepo){
         this.zalogjegyRepo = zalogjegyRepo;
     }
+
 
     public void ujZalog(String leiras, int karat, double suly, int dbSzam, int osszeg, LocalDate beadas, Ugyfel ugyfel){
         Zalogjegy zalogjegy = new Zalogjegy(leiras, karat, suly, dbSzam, osszeg, beadas, ugyfel);
@@ -78,6 +79,15 @@ public class ZalogjegyService {
 
     public Zalogjegy zalogjegyId(long id){
         return  zalogjegyRepo.findById(id);
+    }
+
+    public List<Zalogjegy> datumElotti(LocalDate beadas){
+        return new ArrayList<>(zalogjegyRepo.findZalogjegyByBeadasBefore(beadas.plusDays(1)));
+    }
+
+    public void bevonasDatumElotti(LocalDate beadas){
+        zalogjegyRepo.torolDatumElott(beadas);
+        //zalogjegyRepo.deleteZalogjegyByBeadasBefore(beadas.plusDays(1));
     }
 
 

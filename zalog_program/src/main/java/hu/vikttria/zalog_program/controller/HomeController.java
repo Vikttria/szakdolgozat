@@ -5,6 +5,7 @@ import hu.vikttria.zalog_program.zaloghaz.Dolgozo;
 import hu.vikttria.zalog_program.zaloghaz.Ugyfel;
 import hu.vikttria.zalog_program.zaloghaz.Zalogfiok;
 import hu.vikttria.zalog_program.zaloghaz.Zalogjegy;
+import org.dom4j.rule.Mode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -136,6 +137,7 @@ public class HomeController {
     @RequestMapping("/lekerdez")
     public String lekerdez(Model model){
         model.addAttribute("zalogjegy", new Zalogjegy());
+        model.addAttribute("kivaltDatum", LocalDate.now());
 
         return "lekerdez";
     }
@@ -182,12 +184,13 @@ public class HomeController {
     public String ugyfel(Model model){
         model.addAttribute("ugyfel", new Ugyfel());
         model.addAttribute("zalogok", zalogjegyService.ugyfelId(2));
+        model.addAttribute("kivaltDatum", LocalDate.now());
 
         return "ugyfel";
     }
 
     @RequestMapping(value = "/ugyfel", method = RequestMethod.POST)
-    public String ugyfel(@ModelAttribute Ugyfel ugyfel,
+    public String ugyfelSubmit(@ModelAttribute Ugyfel ugyfel,
                          @RequestParam(value = "kivaltDatum") String kivaltDatum,
                          @RequestParam(value = "zalogId") String zalogId,
                          Model model){
@@ -218,7 +221,7 @@ public class HomeController {
     }
 
     @RequestMapping(value = "/zalogfiok", method = RequestMethod.POST)
-    public String zalogfiokUj(@ModelAttribute Zalogfiok zalogfiok, Model model){
+    public String zalogfiokUjSubmit(@ModelAttribute Zalogfiok zalogfiok, Model model){
 
         fiokService.ujFiok(zalogfiok.getCim(), zalogfiok.getTelefon());
 
@@ -229,7 +232,7 @@ public class HomeController {
     }
 
     @RequestMapping(value = "/fiokTorol", method = RequestMethod.POST)
-    public String fiokTorol(@ModelAttribute Zalogfiok fiok, Model model){
+    public String fiokTorolSubmit(@ModelAttribute Zalogfiok fiok, Model model){
 
         fiokService.fiokTorol(fiok.getId());
         model.addAttribute("zalogfiok", new Zalogfiok());
@@ -249,7 +252,7 @@ public class HomeController {
     }
 
     @RequestMapping(value = "/dolgozo", method = RequestMethod.POST)
-    public String dolgozoUj(@ModelAttribute Dolgozo dolgozo, Model model){
+    public String dolgozoUjSubmit(@ModelAttribute Dolgozo dolgozo, Model model){
 
         dolgozoService.ujDolgozo(dolgozo.getNev(), dolgozo.getTelefon(), dolgozo.getEmail(), dolgozo.getZalogfiok(), dolgozo.getBeosztas());
 
@@ -262,7 +265,7 @@ public class HomeController {
     }
 
     @RequestMapping(value = "/dolgozoTorol", method = RequestMethod.POST)
-    public String dolgozoTorol(@ModelAttribute Dolgozo dolgozo, Model model){
+    public String dolgozoTorolSubmit(@ModelAttribute Dolgozo dolgozo, Model model){
         dolgozoService.dolgozoTorol(dolgozo.getId());
         model.addAttribute("dolgozo", new Dolgozo());
         model.addAttribute("dolgozok", dolgozoService.allDolgozo());
@@ -270,6 +273,32 @@ public class HomeController {
         model.addAttribute("beosztasok", beosztasService.allBeosztas());
 
         return "dolgozo";
+    }
+
+    @RequestMapping("/bevon")
+    public String bevon(Model model){
+
+        model.addAttribute("zalogjegy", new Zalogjegy());
+        model.addAttribute("datum", LocalDate.now().minusDays(90));
+
+        return "bevon";
+    }
+
+    @RequestMapping(value = "/bevon", method = RequestMethod.POST, params = "action=listaz")
+    public String listazSubmit(@ModelAttribute Zalogjegy zalogjegy, @RequestParam(value = "datum") String datum, Model model){
+
+        model.addAttribute("zalogjegyek", zalogjegyService.datumElotti(LocalDate.parse(datum)));
+        model.addAttribute("datum", datum);
+
+        return "bevon";
+    }
+
+    @RequestMapping(value = "/bevon", method = RequestMethod.POST, params = "action=bevonas")
+    public String bevonasSubmit(@ModelAttribute Zalogjegy zalogjegy, @RequestParam(value = "datum") String datum/*, Model model*/){
+        zalogjegyService.bevonasDatumElotti(LocalDate.parse(datum));
+        //model.addAttribute("zalogjegy", new Zalogjegy());
+
+        return "bevon";
     }
 
 

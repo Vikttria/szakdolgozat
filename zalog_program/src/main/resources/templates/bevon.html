@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="hu" layout:decorator="fragments/main" xmlns:layout="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Zálog-program</title>
+</head>
+<body>
+<div layout:fragment="content">
+
+    <form name="bevon" th:action="@{/bevon}" th:object="${zalogjegy}" method="post">
+
+        <div class="form-row mt-5">
+            <div class="input-group mb-4 col-md-3 offset-md-1">
+                <div class="input-group">
+                    <span class="input-group-text">Beadás dátuma</span>
+                </div>
+                <input th:name="datum" th:value="${datum}" class="form-control" type="date" placeholder="DÁTUM" required>
+            </div>
+
+            <div class="mt-5 mb-5 col-md-4 offset-md-2">
+                <button type="submit" class="btn btn-secondary btn-lg btn-block" th:name="action" th:value="listaz">Listáz</button>
+            </div>
+
+        </div>
+
+
+    <div class="container">
+        <table class="table table-hover mb-5">
+            <thead class="thead-light">
+            <tr>
+                <th scope="col">Sorszám</th>
+                <th scope="col">Ügyfél</th>
+                <th scope="col">Beadás dátuma</th>
+                <th scope="col">Leírás</th>
+                <th scope="col">Db</th>
+                <th scope="col">Súly</th>
+                <th scope="col">Karát</th>
+                <th scope="col">Kölcsön összeg</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="zalogjegy : ${zalogjegyek}">
+                <th scope="row" th:text="${zalogjegy.id}"></th>
+                <td th:text="${zalogjegy.ugyfel.nev + ' (szig: ' + zalogjegy.ugyfel.szig + ' )'}"></td>
+                <td th:text="${zalogjegy.beadas}"></td>
+                <td th:text="${zalogjegy.leiras}"></td>
+                <td th:text="${zalogjegy.dbSzam}"></td>
+                <td th:text="${zalogjegy.suly}"></td>
+                <td th:text="${zalogjegy.karat}"></td>
+                <td th:text="${zalogjegy.osszeg}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+        <div class="form-row mt-5">
+
+            <div class="col-md-4 offset-md-8 mt-5 mb-5">
+                <button type="submit" class="btn btn-secondary btn-lg btn-block" th:name="action" th:value="bevonas">Bevonás</button>
+            </div>
+
+        </div>
+
+    </form>
+
+</div>
+</body>
+</html>
