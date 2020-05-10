@@ -199,6 +199,7 @@ public class HomeController {
         model.addAttribute("ugyfel", new Ugyfel());
         model.addAttribute("zalogjegy", new Zalogjegy());
         model.addAttribute("zalogok", zalogjegyService.ugyfelId(2));
+        model.addAttribute("kivaltDatum", kivaltDatum);
 
         model.addAttribute("cim", zalogjegy.getZalogfiok().getCim());
         model.addAttribute("tel", zalogjegy.getZalogfiok().getTelefon());
@@ -233,7 +234,6 @@ public class HomeController {
 
     @RequestMapping(value = "/fiokTorol", method = RequestMethod.POST)
     public String fiokTorolSubmit(@ModelAttribute Zalogfiok fiok, Model model){
-
         fiokService.fiokTorol(fiok.getId());
         model.addAttribute("zalogfiok", new Zalogfiok());
         model.addAttribute("zalogfiokok", fiokService.allFiok());
@@ -294,9 +294,9 @@ public class HomeController {
     }
 
     @RequestMapping(value = "/bevon", method = RequestMethod.POST, params = "action=bevonas")
-    public String bevonasSubmit(@ModelAttribute Zalogjegy zalogjegy, @RequestParam(value = "datum") String datum/*, Model model*/){
+    public String bevonasSubmit(@ModelAttribute Zalogjegy zalogjegy, @RequestParam(value = "datum") String datum, Model model){
         zalogjegyService.bevonasDatumElotti(LocalDate.parse(datum));
-        //model.addAttribute("zalogjegy", new Zalogjegy());
+        model.addAttribute("datum", LocalDate.now().minusDays(90));
 
         return "bevon";
     }
