@@ -17,9 +17,13 @@ public class Ugyfel {
     private String anyjaNeve;
     @Column(nullable = false)
     private String cim;
+    @Column(unique = true, nullable = false)
     private String email;
     @OneToMany(mappedBy = "ugyfel")
     private List<Zalogjegy> zalogtargyak;
+
+    @OneToOne
+    private User user;
 
     public Ugyfel(){}
 
@@ -85,5 +89,13 @@ public class Ugyfel {
 
     public void setZalogtargyak(List<Zalogjegy> zalogtargyak) {
         this.zalogtargyak = zalogtargyak;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

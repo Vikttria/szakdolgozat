@@ -15,6 +15,10 @@ public class Beosztas {
 
     public Beosztas(){}
 
+    public Beosztas(String munkakor){
+        this.munkakor = munkakor;
+    }
+
     public long getId() {
         return id;
     }

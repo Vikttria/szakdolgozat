@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 @Service
 public class UgyfelService {
@@ -29,13 +30,29 @@ public class UgyfelService {
         return new ArrayList<>(ugyfelRepo.findAllByOrderByNev());
     }
 
-    public List<Ugyfel> ugyfelId(long id) {
-        return new ArrayList<>(ugyfelRepo.findById(id));
+    public Ugyfel ugyfelId(long id) {
+        return (ugyfelRepo.findById(id));
+    }
+
+    public String jelszo(){
+
+        Random random = new Random();
+        char[] word = new char[8];
+        for (int i = 0; i < word.length; i++){
+            word[i] = (char) ('a' + random.nextInt(26));
+        }
+
+        return new String(word);
     }
 
     @PostConstruct
     public void init(){
+        if (ugyfelId(1) != null) {
+            return;
+        }
+
         Ugyfel ugyfel = new Ugyfel("Anonymous", "", "", "", "");
         ugyfelRepo.save(ugyfel);
     }
+
 }

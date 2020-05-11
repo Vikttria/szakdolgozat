@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 @Service
 public class DolgozoService {
@@ -32,5 +33,16 @@ public class DolgozoService {
 
     public void dolgozoTorol(long id){
         dolgozoRepo.deleteById(id);
+    }
+
+    public String jelszo(){
+
+        Random random = new Random();
+        char[] word = new char[8];
+        for (int i = 0; i < word.length; i++){
+            word[i] = (char) ('a' + random.nextInt(26));
+        }
+
+        return new String(word);
     }
 }

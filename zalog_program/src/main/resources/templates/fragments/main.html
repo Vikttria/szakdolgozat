@@ -39,10 +39,6 @@
                         <a href="lekerdez" class="dropdown-item">Lekérdezés</a>
                     </div>
                 </li>
-<!--
-                <li class="nav-item">
-                    <a class="nav-link" href="kereses">Zálogjegy keresés</a>
-                </li>-->
 
                 <li class="nav-item">
                     <a class="nav-link" href="ugyfelFelvet">Új ügyfél felvétel</a>
@@ -65,9 +61,9 @@
             </ul>
 
             <div class="navbar-text navbar-right">
-                Üdvözöljük <span>Anonymous </span>
-                <form sec:authorize="isAuthenticated()" th:action="@{/kijelentkezes}" method="post">
-                   | <a href="">Kijelentkezés</a>
+                Üdvözöljük <span >Anonymous </span>
+                <form method="post">
+                   | <a >Kijelentkezés</a>
                 </form>
             </div>
 
