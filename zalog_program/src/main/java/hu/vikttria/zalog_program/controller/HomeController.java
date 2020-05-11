@@ -2,7 +2,6 @@ package hu.vikttria.zalog_program.controller;
 
 import hu.vikttria.zalog_program.service.*;
 import hu.vikttria.zalog_program.zaloghaz.*;
-import org.dom4j.rule.Mode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +48,13 @@ public class HomeController {
     public void setBeosztasService(BeosztasService beosztasService) {
         this.beosztasService = beosztasService;
     }
+
+    private EmailService emailService;
+    @Autowired
+    public void setEmailService(EmailService emailService) {
+        this.emailService = emailService;
+    }
+
     @Autowired
     private UserService userService;
 
@@ -257,9 +263,12 @@ public class HomeController {
     @RequestMapping(value = "/dolgozo", method = RequestMethod.POST)
     public String dolgozoUjSubmit(@ModelAttribute Dolgozo dolgozo, Model model){
 
-        dolgozoService.ujDolgozo(dolgozo.getNev(), dolgozo.getTelefon(), dolgozo.getEmail(), dolgozo.getZalogfiok(), dolgozo.getBeosztas());
+        String jelszo = dolgozoService.jelszo();
 
-        User user = new User(dolgozo.getEmail(), dolgozoService.jelszo());
+        dolgozoService.ujDolgozo(dolgozo.getNev(), dolgozo.getTelefon(), dolgozo.getEmail(), dolgozo.getZalogfiok(), dolgozo.getBeosztas());
+        emailService.uzenetKuldesDolgozo(dolgozo.getEmail(),dolgozo.getNev(), jelszo);
+
+        User user = new User(dolgozo.getEmail(), jelszo);
         userService.save(user);
 
         model.addAttribute("dolgozo", new Dolgozo());
