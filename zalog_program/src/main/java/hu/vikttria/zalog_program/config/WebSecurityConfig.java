@@ -41,7 +41,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                     .antMatchers("/bevon", "/dolgozo", "/zalogfiok").hasRole("IGAZGATO")
-                    .antMatchers("/felvet", "/hosszabbit", "/kivalt", "/lekerdez", "/ugyfelFelvet").hasRole("DOLGOZO")
+                    .antMatchers( "/felvet", "/hosszabbit", "/kivalt", "/lekerdez", "/ugyfelFelvet").hasRole("DOLGOZO")
                     .antMatchers("/ugyfel").hasRole("UGYFEL")
                     .anyRequest().authenticated()
                 .and()
