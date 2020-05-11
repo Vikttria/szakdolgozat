@@ -39,4 +39,21 @@ public class EmailService {
         }
     }
 
+    public void uzenetKuldesUgyfel(String email, String nev, String jelszo) {
+        SimpleMailMessage message = null;
+
+        try {
+            message = new SimpleMailMessage();
+            message.setFrom(KULDO);
+            message.setTo(email);
+            message.setSubject("Üdv Nálunk");
+            message.setText("Kedves " + nev + "!\n\nKöszönjük, hogy Nálunk zálogosított el! Egy mobil webalkalmazáson keresztül nyomon követheti zálogjegyét!\n\nA bejelentkezéshez szükséges e-mail cím: " + email + "\nJelszó: " + jelszo);
+
+            javaMailSender.send(message);
+            log.info("Sikeres e-mail küldés");
+        }catch (Exception e){
+            log.error("Hiba az email küldésben! " + e);
+        }
+    }
+
 }
