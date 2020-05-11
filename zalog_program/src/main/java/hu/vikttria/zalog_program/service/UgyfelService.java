@@ -45,14 +45,5 @@ public class UgyfelService {
         return new String(word);
     }
 
-    @PostConstruct
-    public void init(){
-        if (ugyfelId(1) != null) {
-            return;
-        }
-
-        Ugyfel ugyfel = new Ugyfel("Anonymous", "", "", "", "");
-        ugyfelRepo.save(ugyfel);
-    }
 
 }
