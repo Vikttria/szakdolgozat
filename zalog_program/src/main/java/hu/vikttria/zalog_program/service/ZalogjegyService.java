@@ -17,8 +17,9 @@ public class ZalogjegyService {
 
     ZalogjegyRepository zalogjegyRepo;
 
+    private final int futamido = 90;
     private final double kamat = 0.2;
-    private final double napiKamat = kamat / 90;
+    private final double napiKamat = kamat / futamido;
     private final double kezelesiKoltseg = 0.05;
 
 
@@ -46,7 +47,7 @@ public class ZalogjegyService {
     }
 
     public LocalDate futamidoLejarta(LocalDate beadas){
-        return beadas.plusDays(90);
+        return beadas.plusDays(futamido);
     }
 
     public int kivaltOsszeg(LocalDate beadas, int kolcsonOsszeg){
@@ -87,13 +88,6 @@ public class ZalogjegyService {
 
     public void bevonasDatumElotti(LocalDate beadas){
         zalogjegyRepo.torolDatumElott(beadas);
-        //zalogjegyRepo.deleteZalogjegyByBeadasBefore(beadas.plusDays(1));
     }
-
-
-
-   /* public List<Zalogjegy> allZalogjegy(){
-        return new ArrayList<>(zalogjegyRepo.findAll());
-    }*/
 
 }
