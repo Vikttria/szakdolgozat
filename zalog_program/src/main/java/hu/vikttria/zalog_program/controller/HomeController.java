@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 @Controller
 public class HomeController {
@@ -193,7 +195,7 @@ public class HomeController {
 
         ugyfelService.ujUgyfel(ugyfel.getNev(), ugyfel.getAnyjaNeve(), ugyfel.getSzig(), ugyfel.getCim(), ugyfel.getEmail());
 
-        User user = new User(ugyfel.getEmail(), ugyfelService.jelszo(), roleService.roleSearch("UGYFEL"));
+        User user = new User(ugyfel.getEmail(), ugyfelService.jelszo(), roleService.roleSearch(3));
         userServiceImpl.save(user);
 
         model.addAttribute("zalogjegy", new Zalogjegy());
@@ -285,7 +287,7 @@ public class HomeController {
         dolgozoService.ujDolgozo(dolgozo.getNev(), dolgozo.getTelefon(), dolgozo.getEmail(), dolgozo.getZalogfiok(), dolgozo.getBeosztas());
         emailService.uzenetKuldesDolgozo(dolgozo.getEmail(), dolgozo.getNev(), jelszo);
 
-        User user = new User(dolgozo.getEmail(), jelszo, roleService.roleSearch("DOLGOZO"));
+        User user = new User(dolgozo.getEmail(), jelszo, roleService.roleSearch(2));
         userServiceImpl.save(user);
 
         model.addAttribute("dolgozo", new Dolgozo());

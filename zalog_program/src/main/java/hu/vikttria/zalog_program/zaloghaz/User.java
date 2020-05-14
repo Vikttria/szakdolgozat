@@ -1,7 +1,7 @@
 package hu.vikttria.zalog_program.zaloghaz;
 
 import javax.persistence.*;
-import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -16,7 +16,7 @@ public class User {
     private String password;
 
     @ManyToMany
-    private Set<Role> roles;
+    private Set<Role> roles = new HashSet<>();
 
     @OneToOne
     private Ugyfel ugyfel;

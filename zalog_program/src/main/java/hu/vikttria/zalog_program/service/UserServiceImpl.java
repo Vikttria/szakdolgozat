@@ -2,14 +2,11 @@ package hu.vikttria.zalog_program.service;
 
 import hu.vikttria.zalog_program.repository.RoleRepository;
 import hu.vikttria.zalog_program.repository.UserRepository;
-import hu.vikttria.zalog_program.zaloghaz.Role;
 import hu.vikttria.zalog_program.zaloghaz.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 
 @Service
 public class UserServiceImpl implements UserService {

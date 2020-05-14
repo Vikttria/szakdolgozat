@@ -16,8 +16,8 @@ public class RoleService {
         this.roleRepo = roleRepo;
     }
 
-    public Role roleSearch(String role) {
-        return  roleRepo.findByName(role);
+    public Role roleSearch(long id) {
+        return roleRepo.findById(id);
     }
 
     @PostConstruct
