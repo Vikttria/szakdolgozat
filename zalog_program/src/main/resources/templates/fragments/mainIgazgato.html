@@ -24,24 +24,23 @@
             <ul class="navbar-nav nav-tabs mr-auto">
 
                 <li class="nav-item">
-                    <a class="nav-link" href="zalogfiok">Zálogfiók</a>
+                    <a class="nav-link" th:href="@{/zalogfiok}">Zálogfiók</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="dolgozo">Dolgozók</a>
+                    <a class="nav-link" th:href="@{/dolgozo}">Dolgozók</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="bevon">Zálogjegyek bevonása kényszerértékesítésre</a>
+                    <a class="nav-link" th:href="@{/bevon}">Zálogjegyek bevonása kényszerértékesítésre</a>
                 </li>
 
 
             </ul>
 
             <div class="navbar-text navbar-right">
-                Üdvözöljük <span >Anonymous </span>
                 <form method="post">
-                   | <a >Kijelentkezés</a>
+                   | <a href="/kijelentkezes">Kijelentkezés</a>
                 </form>
             </div>
 

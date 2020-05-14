@@ -24,28 +24,27 @@
             <ul class="navbar-nav nav-tabs mr-auto">
 
                 <li class="nav-item">
-                    <a class="nav-link" href="felvet">Zálogjegy felvétel</a>
+                    <a class="nav-link" th:href="@{/felvet{">Zálogjegy felvétel</a>
                 </li>
 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown">Zálogjegy kezelés</a>
                     <div class="dropdown-menu">
-                        <a href="kivalt" class="dropdown-item">Kiváltás</a>
-                        <a href="hosszabbit" class="dropdown-item">Hosszabbítás</a>
+                        <a th:href="@{/kivalt}" class="dropdown-item">Kiváltás</a>
+                        <a href="@{/hosszabbit}" class="dropdown-item">Hosszabbítás</a>
                         <div class="dropdown-divider"></div>
-                        <a href="lekerdez" class="dropdown-item">Lekérdezés</a>
+                        <a href="@{/lekerdez}" class="dropdown-item">Lekérdezés</a>
                     </div>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="ugyfelFelvet">Új ügyfél felvétel</a>
+                    <a class="nav-link" th:href="@{/ugyfelFelvet}">Új ügyfél felvétel</a>
                 </li>
 
 
             </ul>
 
             <div class="navbar-text navbar-right">
-                Üdvözöljük <span >Anonymous </span>
                 <form method="post">
                    | <a >Kijelentkezés</a>
                 </form>

@@ -5,6 +5,8 @@ import hu.vikttria.zalog_program.zaloghaz.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -56,12 +58,24 @@ public class HomeController {
     }
 
     @Autowired
-    private UserService userService;
+    private UserServiceImpl userServiceImpl;
 
+    @Autowired
+    private RoleService roleService;
 
 
     @RequestMapping("/")
     public String home(){
+        return "bejelentkezes";
+    }
+
+ /*   @RequestMapping(value = "/bejelentkezes", method = RequestMethod.POST)
+    public RedirectView bejelent(){
+        return new RedirectView("");
+    }*/
+
+    @RequestMapping("/kijelentkezes")
+    public String kijelentkezes(){
         return "bejelentkezes";
     }
 
@@ -179,8 +193,8 @@ public class HomeController {
 
         ugyfelService.ujUgyfel(ugyfel.getNev(), ugyfel.getAnyjaNeve(), ugyfel.getSzig(), ugyfel.getCim(), ugyfel.getEmail());
 
-        User user = new User(ugyfel.getEmail(), ugyfelService.jelszo(), ugyfel);
-        userService.save(user);
+        User user = new User(ugyfel.getEmail(), ugyfelService.jelszo(), roleService.roleSearch("UGYFEL"));
+        userServiceImpl.save(user);
 
         model.addAttribute("zalogjegy", new Zalogjegy());
         model.addAttribute("ugyfelek", ugyfelService.allUgyfel());
@@ -203,11 +217,14 @@ public class HomeController {
                          @RequestParam(value = "kivaltDatum") String kivaltDatum,
                          @RequestParam(value = "zalogId") String zalogId,
                          Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String name = auth.getName();
+
         Zalogjegy zalogjegy = zalogjegyService.zalogjegyId(Long.parseLong(zalogId));
 
         model.addAttribute("ugyfel", new Ugyfel());
         model.addAttribute("zalogjegy", new Zalogjegy());
-        model.addAttribute("zalogok", zalogjegyService.ugyfelId(2));
+        model.addAttribute("zalogok", zalogjegyService.ugyfelId(ugyfelService.ugyfelEmail(name).getId()));
         model.addAttribute("kivaltDatum", kivaltDatum);
 
         model.addAttribute("cim", zalogjegy.getZalogfiok().getCim());
@@ -266,10 +283,10 @@ public class HomeController {
         String jelszo = dolgozoService.jelszo();
 
         dolgozoService.ujDolgozo(dolgozo.getNev(), dolgozo.getTelefon(), dolgozo.getEmail(), dolgozo.getZalogfiok(), dolgozo.getBeosztas());
-        emailService.uzenetKuldesDolgozo(dolgozo.getEmail(),dolgozo.getNev(), jelszo);
+        emailService.uzenetKuldesDolgozo(dolgozo.getEmail(), dolgozo.getNev(), jelszo);
 
-        User user = new User(dolgozo.getEmail(), jelszo);
-        userService.save(user);
+        User user = new User(dolgozo.getEmail(), jelszo, roleService.roleSearch("DOLGOZO"));
+        userServiceImpl.save(user);
 
         model.addAttribute("dolgozo", new Dolgozo());
         model.addAttribute("dolgozok", dolgozoService.allDolgozo());

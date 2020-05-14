@@ -47,9 +47,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin()
                     .loginPage("/bejelentkezes")
+                    //.defaultSuccessUrl("/bevon")
+                    .successForwardUrl("/bevon")
                     .permitAll()
                 .and()
                 .logout()
+                    .logoutSuccessUrl("/bejelentkezes")
+                    .logoutUrl("/kijelentkezes")
+                    .clearAuthentication(true)
+                    .deleteCookies("my-remember-me-cookie")
                     .permitAll();
     }
 

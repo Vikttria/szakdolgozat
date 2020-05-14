@@ -33,6 +33,10 @@ public class UgyfelService {
         return (ugyfelRepo.findById(id));
     }
 
+    public Ugyfel ugyfelEmail(String email){
+        return ugyfelRepo.findByEmail(email);
+    }
+
     public String jelszo(){
 
         Random random = new Random();
@@ -43,6 +47,5 @@ public class UgyfelService {
 
         return new String(word);
     }
-
 
 }

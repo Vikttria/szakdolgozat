@@ -11,4 +11,6 @@ public interface UgyfelRepository extends CrudRepository<Ugyfel, Long> {
 
     Ugyfel findById(long id);
 
+    Ugyfel findByEmail(String email);
+
 }

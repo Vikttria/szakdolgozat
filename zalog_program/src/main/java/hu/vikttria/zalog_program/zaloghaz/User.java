@@ -1,6 +1,7 @@
 package hu.vikttria.zalog_program.zaloghaz;
 
 import javax.persistence.*;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
@@ -22,15 +23,17 @@ public class User {
 
     public User(){}
 
-    public User(String username,String password, Ugyfel ugyfel) {
+    public User(String username,String password, Ugyfel ugyfel, Role role) {
         this.username = username;
         this.password = password;
         this.ugyfel = ugyfel;
+        this.roles.add(role);
     }
 
-    public User(String username,String password) {
+    public User(String username,String password, Role role) {
         this.username = username;
         this.password = password;
+        this.roles.add(role);
     }
 
     public long getId() {
