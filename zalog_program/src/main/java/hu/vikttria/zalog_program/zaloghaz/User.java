@@ -15,8 +15,8 @@ public class User {
     private String username;
     private String password;
 
-    @ManyToMany
-    private Set<Role> roles = new HashSet<>();
+    @ManyToOne
+    private Role role;
 
     @OneToOne
     private Ugyfel ugyfel;
@@ -27,13 +27,13 @@ public class User {
         this.username = username;
         this.password = password;
         this.ugyfel = ugyfel;
-        this.roles.add(role);
+        this.role = role; //.add(role);
     }
 
     public User(String username,String password, Role role) {
         this.username = username;
         this.password = password;
-        this.roles.add(role);
+        this.role = role;
     }
 
     public long getId() {
@@ -60,12 +60,12 @@ public class User {
         this.password = password;
     }
 
-    public Set<Role> getRoles() {
-        return roles;
+    public Role getRole() {
+        return role;
     }
 
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     public Ugyfel getUgyfel(List<Ugyfel> byId) {

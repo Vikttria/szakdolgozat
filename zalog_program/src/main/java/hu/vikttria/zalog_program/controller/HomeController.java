@@ -1,5 +1,6 @@
 package hu.vikttria.zalog_program.controller;
 
+import ch.qos.logback.core.encoder.EchoEncoder;
 import hu.vikttria.zalog_program.service.*;
 import hu.vikttria.zalog_program.zaloghaz.*;
 import org.slf4j.Logger;
@@ -7,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -279,6 +281,9 @@ public class HomeController {
         return "dolgozo";
     }
 
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
     @RequestMapping(value = "/dolgozo", method = RequestMethod.POST)
     public String dolgozoUjSubmit(@ModelAttribute Dolgozo dolgozo, Model model){
 
@@ -286,6 +291,10 @@ public class HomeController {
 
         dolgozoService.ujDolgozo(dolgozo.getNev(), dolgozo.getTelefon(), dolgozo.getEmail(), dolgozo.getZalogfiok(), dolgozo.getBeosztas());
         emailService.uzenetKuldesDolgozo(dolgozo.getEmail(), dolgozo.getNev(), jelszo);
+
+        log.info(jelszo);
+        log.info(bCryptPasswordEncoder.encode(jelszo));
+        log.info(bCryptPasswordEncoder.encode(jelszo));
 
         User user = new User(dolgozo.getEmail(), jelszo, roleService.roleSearch(2));
         userServiceImpl.save(user);
