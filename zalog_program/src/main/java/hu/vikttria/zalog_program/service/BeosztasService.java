@@ -28,16 +28,14 @@ public class BeosztasService {
 
     @PostConstruct
     public void init(){
-        if (beosztasKeres("becsüs") != null
-                && beosztasKeres("pénztáros") != null) {
-            return;
+        if (beosztasKeres("becsüs") == null) {
+            Beosztas becsus = new Beosztas("becsüs");
+            beosztasRepo.save(becsus);
         }
-
-        Beosztas becsus = new Beosztas("becsüs");
-        Beosztas penztaros = new Beosztas("pénztáros");
-
-        beosztasRepo.save(becsus);
-        beosztasRepo.save(penztaros);
+        if (beosztasKeres("pénztáros") == null) {
+            Beosztas penztaros = new Beosztas("pénztáros");
+            beosztasRepo.save(penztaros);
+        }
     }
 
 }

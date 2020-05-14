@@ -22,20 +22,18 @@ public class RoleService {
 
     @PostConstruct
     public void init(){
-        if (roleRepo.findByName("IGAZGATO") != null
-                && roleRepo.findByName("DOLGOZO") != null
-                && roleRepo.findByName("UGYFEL") != null ){
-            return;
+        if (roleRepo.findByName("IGAZGATO") == null) {
+            Role igazgato = new Role("IGAZGATO");
+            roleRepo.save(igazgato);
         }
-
-        Role igazgato = new Role("IGAZGATO");
-        Role dolgozo = new Role("DOLGOZO");
-        Role ugyfel = new Role("UGYFEL");
-
-        roleRepo.save(igazgato);
-        roleRepo.save(dolgozo);
-        roleRepo.save(ugyfel);
-
+        if (roleRepo.findByName("DOLGOZO") == null) {
+            Role dolgozo = new Role("DOLGOZO");
+            roleRepo.save(dolgozo);
+        }
+        if (roleRepo.findByName("UGYFEL") == null) {
+            Role ugyfel = new Role("UGYFEL");
+            roleRepo.save(ugyfel);
+        }
     }
 
 }
