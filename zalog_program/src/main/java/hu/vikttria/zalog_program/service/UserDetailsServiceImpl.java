@@ -2,6 +2,8 @@ package hu.vikttria.zalog_program.service;
 
 import hu.vikttria.zalog_program.repository.UserRepository;
 import hu.vikttria.zalog_program.zaloghaz.User;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -16,6 +18,8 @@ import java.util.List;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
+
+    private final Logger log = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     UserRepository userRepository;
@@ -33,6 +37,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
         List<GrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority(user.getRole().getName()));
+        log.info(user.getUsername() + " " + user.getRole().getName());
 
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), authorities);
     }

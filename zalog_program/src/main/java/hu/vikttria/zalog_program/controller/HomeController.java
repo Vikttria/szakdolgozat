@@ -1,6 +1,5 @@
 package hu.vikttria.zalog_program.controller;
 
-import ch.qos.logback.core.encoder.EchoEncoder;
 import hu.vikttria.zalog_program.service.*;
 import hu.vikttria.zalog_program.zaloghaz.*;
 import org.slf4j.Logger;
@@ -8,7 +7,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -17,8 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 @Controller
 public class HomeController {
@@ -72,11 +68,6 @@ public class HomeController {
     public String home(){
         return "bejelentkezes";
     }
-
- /*   @RequestMapping(value = "/bejelentkezes", method = RequestMethod.POST)
-    public RedirectView bejelent(){
-        return new RedirectView("");
-    }*/
 
     @RequestMapping("/kijelentkezes")
     public String kijelentkezes(){
@@ -264,7 +255,7 @@ public class HomeController {
         return "zalogfiok";
     }
 
-    @RequestMapping(value = "/zalogfiok", method = RequestMethod.POST)
+    @RequestMapping(value = "/zalogfiokUj", method = RequestMethod.POST)
     public String zalogfiokUjSubmit(@ModelAttribute Zalogfiok zalogfiok,
                                     @RequestParam(value = "jelszo") String jelszo,
                                     Model model){
@@ -321,7 +312,7 @@ public class HomeController {
 
     @RequestMapping(value = "/dolgozoTorol", method = RequestMethod.POST)
     public String dolgozoTorolSubmit(@ModelAttribute Dolgozo dolgozo, Model model){
-        //userServiceImpl.userDelete(dolgozo.getEmail());
+
         dolgozoService.dolgozoTorol(dolgozo.getId());
         model.addAttribute("dolgozo", new Dolgozo());
         model.addAttribute("dolgozok", dolgozoService.allDolgozo());
