@@ -1,6 +1,5 @@
 package hu.vikttria.zalog_program.zaloghaz;
 
-
 import javax.persistence.*;
 import java.util.List;
 

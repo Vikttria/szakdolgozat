@@ -16,18 +16,13 @@ import java.util.List;
 @Service
 public class ZalogjegyService {
 
+    @Autowired
     ZalogjegyRepository zalogjegyRepo;
 
     private final int futamido = 90;
     private final double kamat = 0.2;
     private final double napiKamat = kamat / futamido;
     private final double kezelesiKoltseg = 0.05;
-
-
-    @Autowired
-    public void setZalogjegyRepo(ZalogjegyRepository zalogjegyRepo){
-        this.zalogjegyRepo = zalogjegyRepo;
-    }
 
 
     public void ujZalog(String leiras, int karat, double suly, int dbSzam, int osszeg, LocalDate beadas, Ugyfel ugyfel, Zalogfiok zalogfiok){

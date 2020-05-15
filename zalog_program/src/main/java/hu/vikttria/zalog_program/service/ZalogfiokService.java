@@ -11,11 +11,8 @@ import java.util.List;
 @Service
 public class ZalogfiokService {
 
-    ZalogfiokRepository fiokRepo;
     @Autowired
-    public void setFiokRepo(ZalogfiokRepository fiokRepo){
-        this.fiokRepo = fiokRepo;
-    }
+    ZalogfiokRepository fiokRepo;
 
 
     public void ujFiok(String cim, String telefon){

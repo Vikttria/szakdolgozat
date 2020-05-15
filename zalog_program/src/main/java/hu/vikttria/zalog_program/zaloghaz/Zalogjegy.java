@@ -19,7 +19,6 @@ public class Zalogjegy {
     private int dbSzam;
     @Column(nullable = false)
     private LocalDate beadas;
-//    private LocalDate lejarat;
     @Column(nullable = false)
     private int osszeg;
     @ManyToOne
@@ -34,7 +33,7 @@ public class Zalogjegy {
         this.leiras = leiras;
         this.karat = karat;
         this.suly = suly;
-        this. dbSzam = dbSzam;
+        this.dbSzam = dbSzam;
         this.osszeg = osszeg;
         this.beadas = beadas;
         this.ugyfel = ugyfel;
@@ -88,14 +87,6 @@ public class Zalogjegy {
     public void setBeadas(LocalDate beadas) {
         this.beadas = beadas;
     }
-
-/*    public LocalDate getLejarat() {
-        return lejarat;
-    }
-
-    public void setLejarat(LocalDate lejarat) {
-        this.lejarat = lejarat;
-    }*/
 
     public int getOsszeg() {
         return osszeg;

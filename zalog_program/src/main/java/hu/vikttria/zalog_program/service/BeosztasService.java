@@ -12,11 +12,8 @@ import java.util.List;
 @Service
 public class BeosztasService {
 
-    BeosztasRepository beosztasRepo;
     @Autowired
-    public void setBeosztasRepo(BeosztasRepository beosztasRepo){
-        this.beosztasRepo = beosztasRepo;
-    }
+    BeosztasRepository beosztasRepo;
 
     public List<Beosztas> allBeosztas(){
         return new ArrayList<>(beosztasRepo.findAllByOrderByMunkakor());

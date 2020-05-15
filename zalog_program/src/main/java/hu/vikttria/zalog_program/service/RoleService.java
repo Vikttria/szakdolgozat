@@ -10,11 +10,9 @@ import javax.annotation.PostConstruct;
 @Service
 public class RoleService {
 
-    RoleRepository roleRepo;
     @Autowired
-    public void setUgyfelRepo(RoleRepository roleRepo) {
-        this.roleRepo = roleRepo;
-    }
+    RoleRepository roleRepo;
+
 
     public Role roleSearch(long id) {
         return roleRepo.findById(id);

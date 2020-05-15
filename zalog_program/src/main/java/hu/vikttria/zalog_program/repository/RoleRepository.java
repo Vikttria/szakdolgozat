@@ -3,7 +3,6 @@ package hu.vikttria.zalog_program.repository;
 import hu.vikttria.zalog_program.zaloghaz.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
 
 public interface RoleRepository extends JpaRepository<Role, Long> {
 

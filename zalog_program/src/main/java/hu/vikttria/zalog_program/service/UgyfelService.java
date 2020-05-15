@@ -12,11 +12,8 @@ import java.util.Random;
 @Service
 public class UgyfelService {
 
-    UgyfelRepository ugyfelRepo;
     @Autowired
-    public void setUgyfelRepo(UgyfelRepository ugyfelRepo) {
-        this.ugyfelRepo = ugyfelRepo;
-    }
+    UgyfelRepository ugyfelRepo;
 
 
     public void ujUgyfel(String nev, String anyjaNeve, String szig, String cim, String email){
@@ -27,10 +24,6 @@ public class UgyfelService {
 
     public List<Ugyfel> allUgyfel() {
         return new ArrayList<>(ugyfelRepo.findAllByOrderByNev());
-    }
-
-    public Ugyfel ugyfelId(long id) {
-        return (ugyfelRepo.findById(id));
     }
 
     public Ugyfel ugyfelEmail(String email){
