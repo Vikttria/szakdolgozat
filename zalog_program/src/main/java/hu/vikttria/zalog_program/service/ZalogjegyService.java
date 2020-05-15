@@ -2,6 +2,7 @@ package hu.vikttria.zalog_program.service;
 
 import hu.vikttria.zalog_program.repository.ZalogjegyRepository;
 import hu.vikttria.zalog_program.zaloghaz.Ugyfel;
+import hu.vikttria.zalog_program.zaloghaz.Zalogfiok;
 import hu.vikttria.zalog_program.zaloghaz.Zalogjegy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,8 +30,8 @@ public class ZalogjegyService {
     }
 
 
-    public void ujZalog(String leiras, int karat, double suly, int dbSzam, int osszeg, LocalDate beadas, Ugyfel ugyfel){
-        Zalogjegy zalogjegy = new Zalogjegy(leiras, karat, suly, dbSzam, osszeg, beadas, ugyfel);
+    public void ujZalog(String leiras, int karat, double suly, int dbSzam, int osszeg, LocalDate beadas, Ugyfel ugyfel, Zalogfiok zalogfiok){
+        Zalogjegy zalogjegy = new Zalogjegy(leiras, karat, suly, dbSzam, osszeg, beadas, ugyfel, zalogfiok);
         zalogjegyRepo.save(zalogjegy);
     }
 

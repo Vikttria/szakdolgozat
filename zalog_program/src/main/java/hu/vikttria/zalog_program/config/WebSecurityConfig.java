@@ -48,6 +48,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                     .loginPage("/bejelentkezes")
                     .successForwardUrl("/zalogfiok")
+                    //.successForwardUrl("/felvet")
+                    //.successForwardUrl("/ugyfel")
                     .permitAll()
                 .and()
                 .logout()

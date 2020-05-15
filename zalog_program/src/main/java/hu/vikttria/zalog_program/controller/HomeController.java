@@ -97,7 +97,17 @@ public class HomeController {
     public String felvetSubmit(@ModelAttribute Zalogjegy zalogjegy, Model model){
         log.info("Új zálogjegy felvétele");
 
-        zalogjegyService.ujZalog(zalogjegy.getLeiras(), zalogjegy.getKarat(), zalogjegy.getSuly(), zalogjegy.getDbSzam(), zalogjegy.getOsszeg(), LocalDate.now(), zalogjegy.getUgyfel());
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String name = auth.getName();
+
+        zalogjegyService.ujZalog(zalogjegy.getLeiras(),
+                zalogjegy.getKarat(),
+                zalogjegy.getSuly(),
+                zalogjegy.getDbSzam(),
+                zalogjegy.getOsszeg(),
+                LocalDate.now(),
+                zalogjegy.getUgyfel(),
+                fiokService.zalogjegyCim(name));
 
         model.addAttribute("zalogjegy", new Zalogjegy());
         model.addAttribute("ugyfelek", ugyfelService.allUgyfel());
@@ -209,8 +219,11 @@ public class HomeController {
 
     @RequestMapping(value = "/ugyfel")
     public String ugyfel(Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String name = auth.getName();
+
         model.addAttribute("ugyfel", new Ugyfel());
-        model.addAttribute("zalogok", zalogjegyService.ugyfelId(2));
+        model.addAttribute("zalogok", zalogjegyService.ugyfelId(ugyfelService.ugyfelEmail(name).getId()));
         model.addAttribute("kivaltDatum", LocalDate.now());
 
         return "ugyfel";
@@ -252,9 +265,14 @@ public class HomeController {
     }
 
     @RequestMapping(value = "/zalogfiok", method = RequestMethod.POST)
-    public String zalogfiokUjSubmit(@ModelAttribute Zalogfiok zalogfiok, Model model){
+    public String zalogfiokUjSubmit(@ModelAttribute Zalogfiok zalogfiok,
+                                    @RequestParam(value = "jelszo") String jelszo,
+                                    Model model){
 
         fiokService.ujFiok(zalogfiok.getCim(), zalogfiok.getTelefon());
+
+        User user = new User(zalogfiok.getCim(), jelszo, roleService.roleSearch(2));
+        userServiceImpl.save(user);
 
         model.addAttribute("zalogfiok", new Zalogfiok());
         model.addAttribute("zalogfiokok", fiokService.allFiok());
@@ -264,6 +282,7 @@ public class HomeController {
 
     @RequestMapping(value = "/fiokTorol", method = RequestMethod.POST)
     public String fiokTorolSubmit(@ModelAttribute Zalogfiok fiok, Model model){
+        userServiceImpl.userDelete(fiok.getCim());
         fiokService.fiokTorol(fiok.getId());
         model.addAttribute("zalogfiok", new Zalogfiok());
         model.addAttribute("zalogfiokok", fiokService.allFiok());
@@ -281,23 +300,16 @@ public class HomeController {
         return "dolgozo";
     }
 
-    @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
-
     @RequestMapping(value = "/dolgozo", method = RequestMethod.POST)
     public String dolgozoUjSubmit(@ModelAttribute Dolgozo dolgozo, Model model){
 
-        String jelszo = dolgozoService.jelszo();
+        //String jelszo = dolgozoService.jelszo();
 
         dolgozoService.ujDolgozo(dolgozo.getNev(), dolgozo.getTelefon(), dolgozo.getEmail(), dolgozo.getZalogfiok(), dolgozo.getBeosztas());
-        emailService.uzenetKuldesDolgozo(dolgozo.getEmail(), dolgozo.getNev(), jelszo);
+        //emailService.uzenetKuldesDolgozo(dolgozo.getEmail(), dolgozo.getNev(), jelszo);
 
-        log.info(jelszo);
-        log.info(bCryptPasswordEncoder.encode(jelszo));
-        log.info(bCryptPasswordEncoder.encode(jelszo));
-
-        User user = new User(dolgozo.getEmail(), jelszo, roleService.roleSearch(2));
-        userServiceImpl.save(user);
+        //User user = new User(dolgozo.getEmail(), jelszo, roleService.roleSearch(2));
+        //userServiceImpl.save(user);
 
         model.addAttribute("dolgozo", new Dolgozo());
         model.addAttribute("dolgozok", dolgozoService.allDolgozo());
@@ -309,6 +321,7 @@ public class HomeController {
 
     @RequestMapping(value = "/dolgozoTorol", method = RequestMethod.POST)
     public String dolgozoTorolSubmit(@ModelAttribute Dolgozo dolgozo, Model model){
+        //userServiceImpl.userDelete(dolgozo.getEmail());
         dolgozoService.dolgozoTorol(dolgozo.getId());
         model.addAttribute("dolgozo", new Dolgozo());
         model.addAttribute("dolgozok", dolgozoService.allDolgozo());

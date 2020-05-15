@@ -10,6 +10,7 @@ public class Dolgozo {
     private long id;
     private String nev;
     private String telefon;
+    @Column(unique = true, nullable = false)
     private String email;
     @ManyToOne
     private Beosztas beosztas;

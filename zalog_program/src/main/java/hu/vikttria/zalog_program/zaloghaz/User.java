@@ -27,7 +27,7 @@ public class User {
         this.username = username;
         this.password = password;
         this.ugyfel = ugyfel;
-        this.role = role; //.add(role);
+        this.role = role;
     }
 
     public User(String username,String password, Role role) {

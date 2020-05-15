@@ -32,4 +32,8 @@ public class ZalogfiokService {
         fiokRepo.deleteById(id);
     }
 
+    public Zalogfiok zalogjegyCim(String cim) {
+        return fiokRepo.findByCim(cim);
+    }
+
 }

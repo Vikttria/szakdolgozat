@@ -30,7 +30,7 @@ public class Zalogjegy {
     public Zalogjegy() {
     }
 
-    public Zalogjegy(String leiras, int karat, double suly, int dbSzam, int osszeg, LocalDate beadas, Ugyfel ugyfel){
+    public Zalogjegy(String leiras, int karat, double suly, int dbSzam, int osszeg, LocalDate beadas, Ugyfel ugyfel, Zalogfiok zalogfiok){
         this.leiras = leiras;
         this.karat = karat;
         this.suly = suly;
@@ -38,6 +38,7 @@ public class Zalogjegy {
         this.osszeg = osszeg;
         this.beadas = beadas;
         this.ugyfel = ugyfel;
+        this.zalogfiok = zalogfiok;
     }
 
     public long getId() {
