@@ -46,7 +46,7 @@ public class EmailService {
             message = new SimpleMailMessage();
             message.setFrom(KULDO);
             message.setTo(email);
-            message.setSubject("Üdv Nálunk");
+            message.setSubject("Üdv Cégünknél");
             message.setText("Kedves " + nev + "!\n\nKöszönjük, hogy Nálunk zálogosított el! Egy mobil webalkalmazáson keresztül nyomon követheti zálogjegyét!\n\nA bejelentkezéshez szükséges e-mail cím: " + email + "\nJelszó: " + jelszo);
 
             javaMailSender.send(message);

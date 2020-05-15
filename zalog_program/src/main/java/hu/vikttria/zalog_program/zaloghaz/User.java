@@ -1,9 +1,8 @@
 package hu.vikttria.zalog_program.zaloghaz;
 
 import javax.persistence.*;
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 public class User {
@@ -18,15 +17,15 @@ public class User {
     @ManyToOne
     private Role role;
 
-    @OneToOne
-    private Ugyfel ugyfel;
+    @OneToMany(mappedBy = "user")
+    private List<Ugyfel> ugyfel = new ArrayList<>();
 
     public User(){}
 
     public User(String username,String password, Ugyfel ugyfel, Role role) {
         this.username = username;
         this.password = password;
-        this.ugyfel = ugyfel;
+        this.ugyfel.add(ugyfel);
         this.role = role;
     }
 
@@ -69,10 +68,10 @@ public class User {
     }
 
     public Ugyfel getUgyfel(List<Ugyfel> byId) {
-        return ugyfel;
+        return ugyfel.get(0);
     }
 
     public void setUgyfel(Ugyfel ugyfel) {
-        this.ugyfel = ugyfel;
+        this.ugyfel.add(ugyfel);
     }
 }

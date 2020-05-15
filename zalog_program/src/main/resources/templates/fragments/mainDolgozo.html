@@ -31,9 +31,9 @@
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown">Zálogjegy kezelés</a>
                     <div class="dropdown-menu">
                         <a th:href="@{/kivalt}" class="dropdown-item">Kiváltás</a>
-                        <a href="@{/hosszabbit}" class="dropdown-item">Hosszabbítás</a>
+                        <a th:href="@{/hosszabbit}" class="dropdown-item">Hosszabbítás</a>
                         <div class="dropdown-divider"></div>
-                        <a href="@{/lekerdez}" class="dropdown-item">Lekérdezés</a>
+                        <a th:href="@{/lekerdez}" class="dropdown-item">Lekérdezés</a>
                     </div>
                 </li>
 
@@ -46,7 +46,7 @@
 
             <div class="navbar-text navbar-right">
                 <form method="post">
-                   | <a >Kijelentkezés</a>
+                   | <a href="/kijelentkezes">Kijelentkezés</a>
                 </form>
             </div>
 

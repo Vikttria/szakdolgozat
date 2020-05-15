@@ -194,11 +194,13 @@ public class HomeController {
 
     @RequestMapping(value = "/ugyfelUj", method = RequestMethod.POST)
     public String ugyfelFelvetSubmit(@ModelAttribute Ugyfel ugyfel, Model model){
-        log.info("Új ügyfél felvétele");
+
+        String jelszo = ugyfelService.jelszo();
 
         ugyfelService.ujUgyfel(ugyfel.getNev(), ugyfel.getAnyjaNeve(), ugyfel.getSzig(), ugyfel.getCim(), ugyfel.getEmail());
+        emailService.uzenetKuldesUgyfel(ugyfel.getEmail(), ugyfel.getNev(), jelszo);
 
-        User user = new User(ugyfel.getEmail(), ugyfelService.jelszo(), roleService.roleSearch(3));
+        User user = new User(ugyfel.getEmail(), jelszo, ugyfelService.ugyfelEmail(ugyfel.getEmail()), roleService.roleSearch(3));
         userServiceImpl.save(user);
 
         model.addAttribute("zalogjegy", new Zalogjegy());
@@ -220,7 +222,7 @@ public class HomeController {
         return "ugyfel";
     }
 
-    @RequestMapping(value = "/ugyfel", method = RequestMethod.POST)
+    @RequestMapping(value = "/ugyfelOk", method = RequestMethod.POST)
     public String ugyfelSubmit(@ModelAttribute Ugyfel ugyfel,
                          @RequestParam(value = "kivaltDatum") String kivaltDatum,
                          @RequestParam(value = "zalogId") String zalogId,

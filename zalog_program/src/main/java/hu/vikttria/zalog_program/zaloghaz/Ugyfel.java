@@ -22,7 +22,7 @@ public class Ugyfel {
     @OneToMany(mappedBy = "ugyfel")
     private List<Zalogjegy> zalogtargyak;
 
-    @OneToOne
+    @ManyToOne
     private User user;
 
     public Ugyfel(){}

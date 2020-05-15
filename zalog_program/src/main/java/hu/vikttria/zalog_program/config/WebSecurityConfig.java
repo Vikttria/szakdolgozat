@@ -69,10 +69,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin()
                     .loginPage("/bejelentkezes")
-                    //.successForwardUrl("/zalogfiok")
                     .successHandler(myAuthenticationSuccessHandler())
-                    //.successForwardUrl("/felvet")
-                    //.successForwardUrl("/ugyfel")
                     .permitAll()
                 .and()
                 .logout()
@@ -104,7 +101,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     }
                 }
             }
-
         };
     }
 
