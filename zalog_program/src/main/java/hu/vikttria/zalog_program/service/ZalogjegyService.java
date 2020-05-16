@@ -26,7 +26,7 @@ public class ZalogjegyService {
 
 
     public void ujZalog(String leiras, int karat, double suly, int dbSzam, int osszeg, LocalDate beadas, Ugyfel ugyfel, Zalogfiok zalogfiok){
-        Zalogjegy zalogjegy = new Zalogjegy(leiras, karat, suly, dbSzam, osszeg, beadas, ugyfel, zalogfiok);
+        Zalogjegy zalogjegy = new Zalogjegy(leiras, karat, suly, dbSzam, osszeg, beadas.plusDays(1), ugyfel, zalogfiok);
         zalogjegyRepo.save(zalogjegy);
     }
 
