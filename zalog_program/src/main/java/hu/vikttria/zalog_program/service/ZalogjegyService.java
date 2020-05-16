@@ -35,10 +35,14 @@ public class ZalogjegyService {
     }
 
     public void hosszabbitZalogjegy(LocalDate beadas, long id){
-        zalogjegyRepo.setBeadasFor(beadas, id);
+        zalogjegyRepo.setBeadasFor(beadas.plusDays(1), id);
     }
 
-    public Zalogjegy getZalogjegy(long id, int osszeg){
+    public Zalogjegy getZalogjegyKivalt(long id, int osszeg, Zalogfiok zalogfiok){
+        return zalogjegyRepo.findFirstByIdAndOsszegAndZalogfiok(id, osszeg, zalogfiok);
+    }
+
+    public Zalogjegy getZalogjegyHosszabbit(long id, int osszeg){
         return zalogjegyRepo.findFirstByIdAndOsszeg(id, osszeg);
     }
 

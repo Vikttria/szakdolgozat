@@ -90,7 +90,10 @@ public class HomeController {
     @RequestMapping(value = "/kivalt", method = RequestMethod.POST, params = "action=ok")
     public String kivaltOkSubmit(@ModelAttribute Zalogjegy zalogjegy, Model model){
 
-        zalogjegy = zalogjegyService.getZalogjegy(zalogjegy.getId(), zalogjegy.getOsszeg());
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String name = auth.getName();
+
+        zalogjegy = zalogjegyService.getZalogjegyKivalt(zalogjegy.getId(), zalogjegy.getOsszeg(), fiokService.zalogjegyCim(name));
 
         kezeles(zalogjegy, model);
         model.addAttribute("fizetendo", zalogjegyService.kivaltOsszeg(zalogjegy.getBeadas(), zalogjegy.getOsszeg()));
@@ -117,7 +120,7 @@ public class HomeController {
     @RequestMapping(value = "/hosszabbit", method = RequestMethod.POST, params = "action=ok")
     public String hosszabbitOkSubmit(@ModelAttribute Zalogjegy zalogjegy, Model model){
 
-        zalogjegy = zalogjegyService.getZalogjegy(zalogjegy.getId(), zalogjegy.getOsszeg());
+        zalogjegy = zalogjegyService.getZalogjegyHosszabbit(zalogjegy.getId(), zalogjegy.getOsszeg());
 
         kezeles(zalogjegy, model);
         model.addAttribute("fizetendo", zalogjegyService.hosszabbitOsszeg(zalogjegy.getBeadas(), zalogjegy.getOsszeg()));
@@ -147,7 +150,7 @@ public class HomeController {
                            @RequestParam(value = "kivaltDatum") String kivaltDatum,
                            Model model){
 
-        zalogjegy = zalogjegyService.getZalogjegy(zalogjegy.getId(), zalogjegy.getOsszeg());
+        zalogjegy = zalogjegyService.getZalogjegyHosszabbit(zalogjegy.getId(), zalogjegy.getOsszeg());
 
         kezeles(zalogjegy, model);
 

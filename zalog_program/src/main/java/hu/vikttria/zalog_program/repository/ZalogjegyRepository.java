@@ -1,5 +1,6 @@
 package hu.vikttria.zalog_program.repository;
 
+import hu.vikttria.zalog_program.zaloghaz.Zalogfiok;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -16,6 +17,8 @@ public interface ZalogjegyRepository extends CrudRepository<Zalogjegy, Long> {
     List<Zalogjegy> findAll();
 
     List<Zalogjegy> findByUgyfelId(long id);
+
+    Zalogjegy findFirstByIdAndOsszegAndZalogfiok(long id, int osszeg, Zalogfiok zalogfiok);
 
     Zalogjegy findFirstByIdAndOsszeg(long id, int osszeg);
 
